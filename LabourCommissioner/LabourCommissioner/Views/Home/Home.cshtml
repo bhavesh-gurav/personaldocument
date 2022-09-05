@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="hero" class="hero2">
+    <h2 class="animate__animated animate__fadeInDown">Online Schemes Application</h2>
+</section>
+
+
+
+
+<section id="portfolio" class="portfoio">
+    <div class="container" data-aos="fade-up">
+        <partial name="~/Views/Shared/_SchemeDetails.cshtml" />
+    </div>
+</section>
+@*modal start*@
+<div class="modal fade" id="dynamicSchemeModel" tabindex="-1" role="dialog" aria-labelledby="dynamicSchemeModelLabel" aria-hidden="true">
+    <div id="divContent"></div>
+</div>
+@*modal end*@

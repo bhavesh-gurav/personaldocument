@@ -1,0 +1,286 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@model Usermaster
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="carousel-container align-items-end text-lg-start">
+                <!--data-aos="fade-down"-->
+                <div id="login" class="card mt-5 bg-transparent login-bx" style="width:340px;border: solid 2px #fff;border-radius: 1.55rem;overflow: hidden;">
+                    <div class="card-header card-primary py-3">
+                        <div class="card-title mb-0 h5">
+                            <i class="bx bx-log-in align-middle"></i>
+                            Login to Portal
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Login" asp-controller="Account">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @if (!string.IsNullOrEmpty(ViewBag.Message))
+                            {
+                                <span class="text-danger">
+                                    @ViewBag.Message
+                                </span>
+                            }
+                            <div class="form-floating mb-3">
+                                <input asp-for="UserName" class="form-control" id="floatingInput" />
+                                <label asp-for="UserName" for="floatingInput"><i class='bx bxs-user'></i> User Name</label>
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Password" type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <label asp-for="Password" for="floatingInput"><i class='bx bxs-lock'></i> Password</label>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="d-grid mb-3">
+                                <input type="submit" value="Login" class="btn btn-secondary" />
+                            </div>
+                        </form>
+                        <div class="mb-2 d-flex justify-content-between f500">
+
+                            <a class="text-white" href="#" data-bs-toggle="modal" data-bs-target="#popup">પાસવર્ડ ભૂલી ગયા છો?</a>
+
+
+                            <a class="text-white" href="#" data-bs-toggle="modal" data-bs-target="#popup1">યુઝર આઇડી ભૂલી ગયા છો?</a>
+                        </div>
+                        <div class="text-white f500">
+                            <span>નવા યુઝર?</span>
+                            <a asp-controller="Home" asp-action="Registration" class="text-white ms-1"> કૃપા કરીને અહીં નોંધણી કરો!</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Icon Boxes Section ======= -->
+    <section id="icon-boxes" class="icon-boxes">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+                    <div class="icon-box">
+                        <div class="icon">Step 1 <i class='bx bx-pencil'></i></div>
+                        <h4 class="title"><a asp-controller="Home" asp-action="Registration">Register Yourself </a></h4>
+                        <p class="description"></p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon-box">
+                        <div class="icon">Step 2 <i class='bx bx-user-check'></i></div>
+                        <h4 class="title"><a href="">Login </a></h4>
+                        <p class="description"></p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon-box">
+                        <div class="icon">Step 3 <i class='bx bx-file'></i></div>
+                        <h4 class="title"><a href="">Apply For the Scheme</a></h4>
+                        <p class="description"></p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+                    <div class="icon-box">
+                        <div class="icon">Step 4 <i class='bx bx-check-circle'></i></div>
+                        <h4 class="title"><a href="">Submit Application</a></h4>
+                        <p class="description"></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Icon Boxes Section -->
+    <!-- ======= About Us Section ======= -->
+    <!--<section id="about" class="about py-5">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Labour, Skill Development and Employment Department</h2>
+                <p></p>
+            </div>-->
+    @*<div class="row content">
+    <div class="col-lg-6">
+    <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua.
+    </p>
+    <ul>
+    <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+    <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+    <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+    </ul>
+    </div>
+    <div class="col-lg-6 pt-4 pt-lg-0">
+    <p>
+    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+    culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <a href="#" class="btn-learn-more rounded-pill text-uppercase">Learn More</a>
+    </div>
+    </div>*@
+
+    <!--</div>
+    </section>-->
+    <!-- End About Us Section -->
+    <!-- ======= Portfoio Section ======= -->
+    @*<section id="portfolio" class="portfoio">
+    <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+    <h2 class="mb-0">Online Schemes Application </h2>
+    <p></p>
+    </div>
+
+    <partial name="~/Views/Shared/_SchemeDetails.cshtml" />*@
+    <!--filter effect-->
+    <!--<div class="row">
+        <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+                <li data-filter="*" class="filter-active">All</li>
+                <li data-filter=".filter-app">Labour Welfare Board</li>
+                <li data-filter=".filter-card">Building and Other Constructions Workers Welfare Board</li>
+                <li data-filter=".filter-web">Other</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row portfolio-container portfolio-container2">
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="scheme"><a asp-controller="Home" asp-action="Form">
+                <i class="bx bx-help-circle"></i>
+                <h5>Scheme name display here</h5></a>
+            </div>
+        </div>
+
+    </div>-->
+    @*</div>
+    </section>*@<!-- End Portfoio Section -->
+
+
+</main><!-- End #main -->
+
+<partial name="_ForgetPasswordPopUp" />
+
+<div class="modal fade" id="dynamicResetPasswordModel" tabindex="-1" role="dialog" aria-labelledby="dynamicResetPasswordModelLabel" aria-hidden="true">
+    <div id="ResetPasswordpartialView"></div>
+</div>
+
+@*<partial name="_ForgetPasswordResetPopUp"/>*@
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+@*<script type="text/javascript">
+    function testSweet() {
+        swal({
+            title: "Message",
+            text: "13232",
+            type: "success"
+        });
+    }
+</script>*@
+<script src="~/js/Common.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+        debugger;
+        var msg = '@TempData["Message"]';
+        //var msg = 'Your Form Is Submitted SuccessFully..!!||1';
+        if (msg != null && msg != '') {
+
+            ShowDynamicSwalAlert("Registration", msg);
+            //swal({
+            //    title: "Message",
+            //    text: msg,
+            //    type: "success"
+            //});
+        }
+    });
+
+
+    $(function() {
+        var msg = '@TempData["Message1"]';
+        if (msg != null && msg != '') {
+            swal({
+                title: "Message",
+                text: msg,
+                type: "error"
+            });
+        }
+    });
+
+
+</script>

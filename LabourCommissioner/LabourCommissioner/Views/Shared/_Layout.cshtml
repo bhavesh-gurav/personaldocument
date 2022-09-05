@@ -1,0 +1,1304 @@
+﻿@using System.Security.Claims;
+@using LabourCommissioner.Abstraction.DataModels
+@using Microsoft.AspNetCore.Identity;
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LabourCommissioner</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+    <script src="~/js/sweetalert.min.js"></script>
+    <link href="~/css/sweetalert.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="~/assets/css/style.css" rel="stylesheet">
+    <style>
+        .btn-secondary-WhtTxt {
+            color: #fff;
+            background: var(--yellow-secondary);
+            padding: 6px 24px 8px 24px;
+            display: inline-block;
+            transition: 0.3s;
+            border-radius: 50px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #f1a40a !important;
+            color: #fff !important;
+        }
+
+        .d-inline {
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@example.com</a>
+                <i class="bi bi-phone-fill phone-icon"></i> +91 9099990999
+            </div>
+            <div class=" d-none d-md-block">
+                <!--cta to parent div <a href="#about" class="scrollto">Get Started</a>-->
+                <div>
+                    <a href="#" class="text-white" id="btn-decrease" title="Decrese Font Size">A-</a>
+                    <a href="#" class="text-white mx-2" id="btn-orig" title="Original Font Size">A</a>
+                    <a href="#" class="text-white" id="btn-increase" title="Increse Font Size">A+</a>
+                    <a href="#footer" class="scrollto border-start ms-2 px-2 text-white">Skip to Main Content</a>
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <form asp-controller="account" asp-action="logout" method="post" class="d-inline">
+                            <button type="submit" style="width:auto" class="btn btn-secondary-WhtTxt pl-3 pr-3 mr-2">
+                                Logout @User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="cta"><a href="#"><i class="bx bx-log-in align-middle me-1"></i>Other Login</a></span>
+                        <span class="cta"><a href="#"><i class="bx bx-log-in align-middle me-1"></i>Employee Login</a></span>
+                    }
+                     
+                    <img src="~/assets/img/logo2.png" alt="" height="50">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <!--<h1 class="logo"><a href="index.html">Anyar</a></h1>-->
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a asp-controller="Home" asp-action="Index" class="logo">
+                <img src="~/assets/img/logo.png" alt="" class="img-fluid">
+            </a>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a class="nav-link scrollto" asp-controller="Home" asp-action="ApplicationDetails">Application Details</a></li>
+                    }
+                    @if (ViewBag.hideHomeButton == false)
+                    {
+                        <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
+
+                    }
+                    @if (ViewBag.showSchemeMenu == true)
+                    {
+                        <li><a class="nav-link scrollto" asp-controller="Home" asp-action="SchemeUsers">Unorganized Workers</a></li>
+                        <li><a class="nav-link scrollto" asp-controller="Home" asp-action="GLWBScheme">Gujarat Labour Welfare Board</a></li>
+                        <li><a class="nav-link scrollto" asp-controller="Home" asp-action="BOCWScheme">Building and Other Constructions Workers Welfare Board</a></li>
+
+                        @*<li class="dropdown">
+                    <a class="nav-link scrollto"><span>Building and Other Constructions Workers Welfare Board</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#BPYschemeDetailsModal">પ્રસૂતિ સહાય યોજના (પ્રસૂતિ પહેલા)</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#BOCWBhagyaLaxmi">પ્રસુતિ સહાય યોજના અને મુખ્યમંત્રી ભાગ્યલક્ષ્મી બોન્ડ યોજના</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#PIPschemeModal">પેન્શન/વીમો/પ્રધાનમંત્રી જીવન જ્યોત/PMSYM સહાય યોજના</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#schemeModalantyesthi">અંત્યેષ્ઠી સહાય યોજના</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#schemeModalAccedental">આકસ્મિક સહાય યોજના</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#SikshanSahayModel">શિક્ષણ સહાય/ પી.એચ.ડી યોજના</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#schemeModalTablet">ટેબ્લેટ સહાય યોજના</a></li>
+                    <li><a asp-controller="Home" asp-action="Form">વિશિષ્ટ કોચિગ  યોજના </a></li>
+                    <li><a asp-controller="Home" asp-action="Form">હોસ્ટેલ સહાય યોજના</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#BOCWVYAVSHAYIK">વ્યવસાયિક રોગોમાં સહાય યોજના</a></li>
+                    <li><a asp-controller="Home" asp-action="Form">તબીબી સહાય યોજના</a></li>
+                    <li><a data-bs-toggle="modal" data-bs-target="#schemeModalNanaji">નાનાજી દેશમુખ યોજના</a></li>
+                    </ul>
+                    </li>*@
+                    }
+                    @if (ViewBag.hideAppStatus == false)
+                    {
+                        <li>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#popup2">Application Status</a>
+                        </li>
+                    }
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+    @RenderBody()
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h4>Our News</h4>
+                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>
+                            2nd Floor , Block-15,  <br>
+                            Udhyog Bhavan , Sector - 11, <br>
+                            Gandhinagar – 382011 <br><br>
+                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Email:</strong> info@example.com<br>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>About Us</h3>
+                        <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>GIPL</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="#">GIPL</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!--PIP Scheme Modal -->
+    <div class="modal fade" id="PIPschemeModal" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel">પેન્શન, વીમો, પીએમજેજેબીવાય સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">આ હેઠળ ૧૮ થી ૫૦ વર્ષ સુધીની મર્યાદામાં આવતા નોંધાયેલા બાંધકામ શ્રમિકો તથા જે આ  યોજનામાં જોડાયેલા હોય તેવા શ્રમિકોને વાર્ષિક રૂ. ૩૩૦/-રૂપિયાનું પ્રીમીયમ તેમના બેંક ખાતામાં DBT મારફત  રીએમ્બર્સ કરવામાં આવશે. જેથી  રૂ. ૨ (બે) લાખ નું જીવન વીમા કવચ મેળવી શકે છે. જે અન્વયે શ્રમીકનુ કુદરતી મૃત્યુ થાય તો તેમના વારસદારોને  રૂપિયા ૨ લાખ ની આર્થિક સહાય મળી રહે. ળ વધી બાંધકામ શ્રમિકનું બાળક પણ ર્ડાકટર, એન્જીનીયર બને તે હેતુસર બાંધકામ શ્રમિકના કોઈ પણ બે બાળકને વર્ષમાં એક વાર માટે આર્થિક સહાય પુરી પાડવી. </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="BOCWPIPSahayYojana" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--GLWB Higher Education Scheme Modal -->
+    <div class="modal fade" id="HigherStudyschemeModal" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel">ઉચ્ચતર શિક્ષણ સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            M.B.B.S./B.D.S./ BAMS/ BHMS/ Physiotherapy/ B. Pharm/ B.E./ C.A./ ICWA/ ICFA/ C.S. માં પ્રવેશ મેળવનાર શ્રમયોગીઓના બાળકો માટે અરજી પત્રક .
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBHigherEducationAward" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--મહિલા શ્રમયોગી લગ્ન સહાય યોજના -->
+    <div class="modal fade" id="GLWBMahilashramLagnaSahay" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel">મહિલા શ્રમયોગી લગ્ન સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+
+
+                        <li class="list-group-item"> શ્રમયોગી મહિલાનો માસિક કુલ પગાર રૂ. ૩૫,૦૦૦/- થી ઓછો હોવો જોઇએ.</li>
+                        <li class="list-group-item"> લગ્ન તારીખથી એક વર્ષની અંદર અરજી કરવાની રહેશે. તથા લગ્નની તારીખે મહીલા શ્રમયોગીના નોકરીનો સમયગાળો ત્રણ વર્ષ પુર્ણ થયેલ હોવો જોઇએ.</li>
+                        <li class="list-group-item">મહિલા શ્રમયોગીઓને પોતાના લગ્ન માટે કન્યાદાન સ્વરૂપે રૂ.૫૧૦૦/- ની સહાય મળવાપાત્ર થશે.</li>
+                        <li class="list-group-item">અધૂરી વિગત તથા સંપુર્ણ બીડાણ વગર રજુ થયેલ અરજી પત્રક તથા સમય મર્યાદા બહાર મળેલ અરજી પત્રક દફતરે કરવામાં આવશે.</li>
+                        <li class="list-group-item">સહાય અન્વયે  આખરી નિર્ણય વેલ્ફેર કમિશ્નરશ્રીનો રહેશે. ન્યાય ક્ષેત્ર અમદાવાદ રહેશે.</li>
+
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBMahilashramLagnaSahay" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+    @*modal start*@
+
+
+    @*modal start*@
+    <!--Prasuti Sahay and Beti Protsahan Sahay Scheme Modal -->
+    <div class="modal fade" id="BOCWBhagyaLaxmi" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel">
+                        પ્રસુતિ સહાય અને મુખ્યમંત્રી ભાગ્યલક્ષ્મી બોન્ડ યોજના
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">•	નોંધાયેલ મહિલા બાંધકામ શ્રમિક પ્રથમ બે પ્રસુતિ માટે આર્થિક સહાય તથા નોંધાયેલ બાંધકામ શ્રમિકની પત્નીને પ્રથમ બે પ્રસુતિ માટે આર્થિક સહાય  </li>
+                        <li class="list-group-item">•	નોંધાયેલ બાંધકામ શ્રમિકની પત્નીને પ્રથમ બે પ્રસુતિ માટે રૂપિયા ૬૦૦૦/-ની આર્થિક સહાય  </li>
+                        <li class="list-group-item">•	લાભાર્થીના ખાતામાં સીધી DBT થી સહાય ચુકવવામાં આવે છે.  </li>
+                        <li class="list-group-item">•	પ્રસુતિ સહાય થયા પછી અરજી કરવાનો સમયગાળો ૧૨ માસ છે. </li>
+                        <li class="list-group-item">•	આ યોજનામાં કસુવાવડના કિસ્સામાં પણ લાભ આપવામાં આવે છે  </li>
+                        <li class="list-group-item">•	લાભાર્થી દ્વારા અરજી જે-તે જીલ્લા કચેરીમાં કરવાની રહે છે.  </li>
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="BOCWBhagyaLaxmiBondYojna" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+    @*modal start*@
+    <!--Prasuti Sahay and Beti Protsahan Sahay Scheme Modal -->
+    <div class="modal fade" id="GLWBPSBPSY" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel">
+                        પ્રસુતિ સહાય અને બેટી પ્રોત્સાહન સહાય યોજના
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span style="color: #2467a8;"><u>હેતુ :-</u></span>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">પ્રસુતિ સહાય યોજનાનો મુખ્ય હેતુ પ્રસુતિ સમયગાળા દરમ્યાન દવાખાના, દવા તથા પૌષ્ટિક આહાર વિગેરે થતાં વધારાના ખર્ચને પોહચી વળવો તેમજ પ્રસૂતાર્થીને પૌષ્ટિક આહાર મળી રહે તે માટે તેઓને આર્થિક સહાયના શુભ આશયથી આ યોજના શરૂ કરવામાં આવેલ છે.</li>
+                    </ul>
+                    <span style="color: #2467a8; "><u>યોજનાનું વિવરણ :-</u></span>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ગુજરાત શ્રમયોગી કલ્યાણ બોર્ડ ધ્વારા શ્રમયોગીઓ અને તેમના આશ્રિતો માટે વિવિધ કલ્યાણલક્ષી યોજનાઓ અમલમાં મૂકવામાં આવેલ છે. જે શ્રમયોગીઓનો લેબર વેલ્ફેર ફંડ નિયમિત રીતે ભરાતો હોય તેવા શ્રમયોગી મહિલા તથા પુરુષ શ્રમયોગીઓની પત્નીને થા પુરુષ શ્રમયોગીઓની પત્ની ને ફક્ત એક પ્રસુતિ માટે રૂ.પ્રસુતિ થાય તો રૂ. ૫૦૦૦૦૦ તથા પુત્રિ થાય તેવા કિસ્સામાં વધુ ૨૫૦૦-૦૦ બેટિ પ્રોત્સાહન રૂપે સહાય આપવામાં આવે છે.</li>
+                        <li class="list-group-item">શ્રમયોગી છેલ્લા ૩ વર્ષથી નોકરી કરતા હોવા જોઇએ અને તેમનો લેબર વેલ્ફેર ફંડ અત્રેની કચેરીમાં નિયમિત જમા થયેલ હોવો જોઇએ.</li>
+                        <li class="list-group-item">શ્રમયોગીનો માસિક કુલ/ગ્રોસ પગાર રૂ. ૩૫,૦૦૦/- થી ઓછો હોવો જોઇએ</li>
+                        <li class="list-group-item">આ યોજનાનો લાભ મહિલા શ્રમયોગી અથવા પુરૂષ શ્રમયોગીની પત્નીને ફક્ત એક પ્રસુતિ પૂરતો મળવાપાત્ર છે.</li>
+                        <li class="list-group-item">પ્રસૂતિબાદ રૂ.૫૦૦૦-૦૦</li>
+                        <li class="list-group-item">પુત્રીનો જ્ન્મ થાય તો બેટી બચાવો યોજના અંતગત રૂ.૨૫૦૦/-નું વધારાનું પ્રોત્સાહન</li>
+                    </ul>
+                    <span style="color: #2467a8;"><u>શરતો :-</u></span>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">પ્રસુતિની તારીખ થી ૧ (એક) વર્ષની અંદર અરજી કરવાની રહેશે ત્યારબાદ અરજી ધ્યાને લેવામાં આવશે નહી.</li>
+                        <li class="list-group-item">તા.૦૧/૦૪/૨૦૨૨ ના રોજ સાઈટ ઉપર અપલોડ કરવામાં આવેલ ફોર્મ જ માન્ય રાખવામા આવશે. જૂના ફોર્મ માન્ય રાખવામા આવશે નહીં.</li>
+                        <li class="list-group-item">શ્રમયોગી છેલ્લા ૩ વર્ષથી નોકરી કરતા હોવા જોઇએ અને તેમનો લેબર વેલ્ફેર ફંડ અત્રેની કચેરીમાં નિયમિત જમા થયેલ હોવો જોઇએ</li>
+                        <li class="list-group-item">શ્રમયોગીનો માસિક કુલ/ગ્રોસ પગાર રૂ. ૩૫,૦૦૦/- થી ઓછો હોવો જોઇએ</li>
+                        <li class="list-group-item">આ યોજનાનો લાભ મહિલા શ્રમયોગી અથવા પુરૂષ શ્રમયોગીની પત્નીને ફક્ત એક પ્રસુતિ પૂરતો મળવાપાત્ર છે.</li>
+                        <li class="list-group-item">જન્મના પ્રમાણપત્ર/દાખલામાં દર્શાવામાં આવેલ પ્રસુતાર્થીનું નામ અને બેંક પાસબૂકમાં દર્શાવેલ પ્રસુતાર્થીના નામમાં ફેરફાર જણાશે તો સહાય આપવામાં આવશે નહી.</li>
+                        <li class="list-group-item">અધૂરી વિગતે રજૂ થયેલ ફોર્મ માન્ય રાખવામા આવશે નહીં.</li>
+                        <li class="list-group-item">સહાય અન્વયે આખરી નિર્ણય વેલ્ફેર કમિશ્ર્નરશ્રીનો રહેશે. ન્યાયક્ષેત્ર અમદાવાદ રહેશે.</li>
+                    </ul>
+                    <span style="color: #2467a8; "><u>બિડાણ :-</u></span>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">બાળકના જન્મના દાખલાની નકલ.(ગ્રામ પંચાયત/નગરપાલિકા/મહાનગરપાલિકા દ્વારા આપવામાં આવેલ)</li>
+                        <li class="list-group-item">પ્રસુતિ અંગે ડોકટરના પ્રમાણપત્રની નકલ.</li>
+                        <li class="list-group-item">શ્રમયોગીઓને કારખાના/સંસ્થા દ્વારા આપવામા આવેલ ઓળખકાર્ડ ની નકલ.</li>
+                        <li class="list-group-item" style="color:red;">નોંધ: શ્રમયોગી દ્વારા કંપનીમાં દાખલ થયા તારીખ અને બાળકના જન્મની તારીખના સમયગાળા દરમ્યાન શ્રમયોગીની નોકરીના 3(ત્રણ) વર્ષ પુર્ણ  થયેલ હોવા જોઈએ.</li>
+                        <li class="list-group-item">શ્રમયોગી દ્વારા જે માસમાં અરજી કરવામાં આવે તેના અગાઉના માસની પગાર સ્લીપની નકલ.</li>
+                        <li class="list-group-item">શ્રમયોગીના આધાર કાર્ડની નકલ.</li>
+                        <li class="list-group-item">પ્રસુતાર્થીના આધાર કાર્ડની નકલ.</li>
+                        <li class="list-group-item">પ્રસુતાર્થીના ચૂટણી કાર્ડ, રેશનકાર્ડ, પાન કાર્ડ, લગ્ન પ્રમાણપત્ર ની નકલ બીડવાની રહેશે (કોઇ પણ એક પૂરાવો રજૂ કરવો)</li>
+                        <li class="list-group-item">સહાયની રકમ પ્રસુતાર્થી મહિલાના નામે ચૂકવવાની હોય પ્રસુતાર્થીની બેંક પાસબૂકની પહેલા પાનાની ઝેરોક્ષ નકલ. (કે જેમાં પતિ અને પત્ની બન્નેના નામનો ઉલ્લેખ થયેલ હોય.)</li>
+                        <li class="list-group-item">વિગત સ્પષ્ટ ન હોય અને રકમ અન્ય ખાતામાં જમા થશે તો કચેરીની કોઈ જ્વાબદારી રહેશે નહીં.</li>
+                        <li class="list-group-item">કંપની દ્વારા અત્રેની કચેરી ખાતે ભરપાઈ કરવામાં આવેલ લેબર વેલ્ફેર ફંડ રસીદની છેલ્લા ત્રણ વર્ષની નકલ.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBPrasutiSahayBetiProtsahanYojna" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    <!--Before Prasurti Scheme Modal -->
+    <div class="modal fade" id="BPYschemeDetailsModal" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel">પ્રસૂતિ સહાય યોજના (પ્રસૂતિ પહેલા)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">•	નોંધાયેલ મહિલા બાંધકામ શ્રમિક પ્રથમ બે પ્રસુતિ માટે આર્થિક સહાય તથા નોંધાયેલ બાંધકામ શ્રમિકની પત્નીને પ્રથમ બે પ્રસુતિ માટે આર્થિક સહાય  </li>
+                        <li class="list-group-item">•	નોંધાયેલ મહિલા બાંધકામ શ્રમિકને રૂપિયા ૨૫૦૦/- પોષણ આહાર માટે આ યોજના અંતર્ગત રૂપિયા ૫૦૦૦ પ્રસુતિ + રૂપિયા ૨૫૦૦/- પોષણ આહાર કુલ રૂપિયા ૭૫૦૦/- તથા બાંધકામ શ્રમિકને સગર્ભાવસ્થાના છેલ્લા ત્રણ માસ તેમજ પ્રસુતિ બાદના ત્રણ માસ માટે વેઈઝ લોસ ના થાય, તે હેતુથી પ્રતિ માસ રૂ.૫૦૦૦/-ની સહાય કુલ ૩૦,૦૦૦/- ની સહાય જે મળીને નોંધાયેલ મહિલા બાંધકામ શ્રમિકને રૂપિયા ૩૭,૫૦૦/-ની સહાય  </li>
+                        <li class="list-group-item">•	લાભાર્થીના ખાતામાં સીધી DBT થી સહાય ચુકવવામાં આવે છે.  </li>
+                        <li class="list-group-item">•	આ યોજનામાં કસુવાવડના કિસ્સામાં પણ લાભ આપવામાં આવે છે  </li>
+                        <li class="list-group-item">•	લાભાર્થી દ્વારા અરજી જે-તે જીલ્લા કચેરીમાં કરવાની રહે છે.  </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="BOCWBeforePrasutiSahay" asp-action="AppPersonalDetails">Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+
+    @*modal start*@
+    <!--ટેબ્લેટ સહાય યોજના -->
+    <div class="modal fade" id="schemeModalTablet" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">ટેબ્લેટ સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">• નોંધાયેલા બાંધકામ શ્રમિકોના બાળકોને અત્યાધુનિક ટેકનોલોજીના યુગમાં ઈન્ટરનેટ મારફત વિવિધ અભ્યાસક્રમો, વિવિધ ક્ષેત્રની ટેકનોલોજીની જાણકારી મેળવવા માટેના જ્ઞાનની અને આધુનિક ટેકનોલોજીથી સજ્જ સાધન સામગ્રી, જેવી કે લેપટોપ, કોમ્પ્યુટર, ટેબલેટ આપવા અત્યંત આવશ્યક છે. </li>
+                        <li class="list-group-item">• નોંધાયેલા બાંધકામ શ્રમિકોના બાળક આર્થિક પરિસ્થિતિને કારણે આવા સાધનો ખરીદી શકતા નથી, માટે નોંધાયેલ બાંધકામ શ્રમિકનું બાળક પણ અન્ય બાળકોની જેમ  આગળ વધે તે માટે. </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="BOCWTabletSahayYojana" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--હોમ લોન વ્યાજ સબસીડી યોજના  -->
+    <div class="modal fade" id="schemeModalHomeLoan" tabindex="-1" aria-labelledby="schemeModalHomeLoan" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">શ્રમયોગી હોમ લોન વ્યાજ સબસીડી યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">• નોંધાયેલા બાંધકામ શ્રમિકોના બાળકોને અત્યાધુનિક ટેકનોલોજીના યુગમાં ઈન્ટરનેટ મારફત વિવિધ અભ્યાસક્રમો, વિવિધ ક્ષેત્રની ટેકનોલોજીની જાણકારી મેળવવા માટેના જ્ઞાનની અને આધુનિક ટેકનોલોજીથી સજ્જ સાધન સામગ્રી, જેવી કે લેપટોપ, કોમ્પ્યુટર, ટેબલેટ આપવા અત્યંત આવશ્યક છે. </li>
+                        <li class="list-group-item">• નોંધાયેલા બાંધકામ શ્રમિકોના બાળક આર્થિક પરિસ્થિતિને કારણે આવા સાધનો ખરીદી શકતા નથી, માટે નોંધાયેલ બાંધકામ શ્રમિકનું બાળક પણ અન્ય બાળકોની જેમ  આગળ વધે તે માટે. </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBHomeLoanSubsidyYojana" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--નાનાજી દેશમુખ યોજના -->
+    <div class="modal fade" id="schemeModalNanaji" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">નાનાજી દેશમુખ યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">•	યોજના અન્વયે ગરીબી રેખાથી ઉપર અથવા ગરીબી રેખાની નીચેના તથા યોજના હેઠળની પાત્રતા ધરાવતા તમામ નોંધાયેલ બાંધકામ શ્રમિકને લાભ મળવાપાત્ર થશે </li>
+                        <li class="list-group-item">•	બાંધકામ શ્રમિક તરીકેની નોંધની થયાની તારીખથી બે વર્ષ બાદ જેઓને પોતાનું ઘર ણ હોય તેવા નોંધાયેલ બાંધકામ શ્રમિકના કુટુંબને શહેરી વિસ્તારોની સ્થાનિક સ્વરાજની સંસ્થા/શહેરી વિકાસ સત્તા મંડળ  તથા ગુજરાત હાઉસિંગ બોર્ડ દ્વારા મુખ્યમંત્રી આવાસ યોજના/ પ્રધાનમંત્રી આવાસ યોજના અન્વયે EWS/LIG/MIG આવાસો પૈકી કોઈ એક કેટેગરીમાં ડ્રો દ્વારા આવાસની ફાળવણી થાય તો યોજના હેઠળ રૂ.૧,૬૦,૦૦૦/-ની સહાય લાભાર્થી વતી બોર્ડ દ્વારા આવાસ ફાળવણી કરનાર જે તે સંસ્થાને હવાલે મુકવામાં આવશે</li>
+                        <li class="list-group-item">•	EWS/LIG/MIG આવાસોમાં રાજ્ય સરકાર/કેન્દ્ર સરકારની મળવાપાત્ર સહાય/ફાળા ઉપરાંત શ્રી નાનાજી દેશમુખ આવાસ યોજના હેઠળ રૂ.૧,૬૦,૦૦૦/-ની બોર્ડની વધારાની સહાય નોંધાયેલ બાંધકામ શ્રમિક વતી મકાન ફાળવણી કરનાર જે તે સત્તામંડળને હવાલે મુકવામાં આવશે</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="BOCWNanajiYojana" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    <!--વ્યવસાયિક રોગ માં સહાય યોજના -->
+    <div class="modal fade" id="BOCWVYAVSHAYIK" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">વ્યવસાયિક રોગોમાં સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item"> બાંધકામ શ્રમયોગીઓને થતા ૧૫ પ્રકારના વ્યવસાયિક રોગો તથા ૨૩ પ્રકારની ગંભીર ઈજાઓમાં મહત્તમ રૂ.૩.૦ લાખની મર્યાદામાં આર્થિક સહાય. </li>
+                        <li class="list-group-item"> (૧)  ૯૦ ટકાથી ઓછી અશક્તતાના કિસ્સામાં  સામાન્ય સંજોગોમાં મફત તબીબી સારવાર તથા માસિક રૂ.૧૫૦૦/-ની સહાય  </li>
+                        <li class="list-group-item"> (૨) ૯૦ થી ૧૦૦ ટકા સુધીની અશક્તતાના કિસ્સામાં મફત તબીબી સારવાર તથા માસિક રૂ.૩૦૦૦/-ની સહાય</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="BOCWVYAVSHAYIK" asp-action="AppPersonalDetails"> Accept</a>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+    @*modal start*@
+    <!--અંત્યેષ્ઠી સહાય યોજના -->
+    <div class="modal fade" id="schemeModalantyesthi" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalantyesthi">અંત્યેષ્ઠી સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ગુજરાત મકાન અને અન્ય બાંધકામ શ્રમયોગી કલ્યાણ બોર્ડમાં નોંધાયેલ બાંધકામ શ્રમયોગીઓને ચાલુ મેમ્બરશિપ દરમ્યાન મૃત્યુ પામે તો અંત્યેષ્ઠી સહાય તરીકે તેમના વારસદાર ને અંત્યેષ્ઠી ક્રિયા માટે રૂ.૧૦,૦૦૦/- (અંકે રૂપિયા દસ હજાર પુરા)ની સહાય આપવામાં આવે છે.તથા સહાય મેળવવાની અરજીની સમયમર્યાદા છ માસ નિયત કરવામાં આવેલ છે.</li>
+                        <li class="list-group-item"> આ યોજનાનો લાભ નોંધાયેલ ૧૮ થી ૬૦ વર્ષના મૃતક બાંધકામ શ્રમિકના વારસદારને લાભ આપવામાં આવે છે. </li>
+
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="BOCWAntyesthiYojana" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+
+    @*modal start*@
+    <!--શ્રમયોગી સાઇકલ સબસીડી સહાયયોજના -->
+    <div class="modal fade" id="GLWBCycleYojna" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">શ્રમયોગી સાઇકલ સબસીડી સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item">ગુજરાત લેબર વેલ્ફેર એક્ટ ૧૯૫૩ અંતર્ગત ગુજરાત શ્રમયોગી ક્લ્યાણ બોર્ડ દ્વારા સંગઠીત ક્ષેત્રના શ્રમયોગીઓ માટે વિવિધ કલ્યાણકારી પ્રવૃતિઓ કરવામાં આવે છે.  </li>
+                        <li class="list-group-item">
+                            ગુજરાત શ્રમયોગી ક્લ્યાણ બોર્ડની સાયકલ સબસીડી યોજના અંતર્ગત જે શ્રમયોગીઓ દ્વારા છેલ્લા ત્રણ વર્ષ નો ફાળો નિયમિત પણે ભરાયેલ હોય તેવા શ્રમયોગીઓને સાયકલ ખરીદ ઉપર બીલ રજુ કર્યેથી રૂ. 1500 ની આર્થીક સહાય
+
+                        </li>
+                        <lable>Rules:</lable>
+                        <li class="list-group-item"> Cycle chassis must be 22 inch </li>
+                        <li class="list-group-item"> Bill with GST  </li>
+                        <li class="list-group-item"> Within 6 month of date of purchase application has to be done</li>
+                        <li class="list-group-item"> Chassis number is mandatory in bill </li>
+                        <li class="list-group-item">Salary must be less then Rs 35000-00 </li>
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBCycleYojna" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--દિવ્યાંગ બાળકો માટે સહાય યોજના -->
+    <div class="modal fade" id="schemeDisabledChildren" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">દિવ્યાંગ બાળકો માટે સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">•	આ યોજના અંતર્ગત તા.૧/૪/૨૦૧૮ થી લાભ આપવામાં આવશે </li>
+                        <li class="list-group-item">•	શ્રમયોગીનો સંસ્થા દ્વારા છેલ્લા ત્રણ વર્ષનો લેબર વેલ્ફેર ફંડ કાપીને અત્રેની કચેરી ખાતે જમા કરવામાં આવેલ હશે તો જ યોજનાનો લાભ મળવાપાત્ર થશે</li>
+                        <li class="list-group-item">•	આ યોજના અંતર્ગત શ્રમયોગીઓના બાળકો કે જેઓ ૪૦% કે તેથી વધુ દિવ્યાંગતા ધરાવતા હોય તેવા કિસ્સાઓમાં સિવિલ સર્જન/મેડિકલ બોર્ડનું પ્રમાણપત્ર રજૂ કર્યેથી ૪૦% થી ૫૬% માટે રૂ.૧૫,૦૦૦/-, ૭૦% થી ૯૦% માટે રૂ. ૨૫,૦૦૦/- તથા ૯૦% થી વધુ ડિસેબીલીટી માટે રૂ. ૫૦,૦૦૦ આર્થિક સહાય મળવા પાત્ર છે. બહેરા મુંગા દિવ્યાંગતા ધરાવતા બાળકોનો આ યોજનામાં સમાવેશ થશે નહી</li>
+                        <li class="list-group-item">•	આ યોજના અન્વયે સમગ્ર નોકરી દરમ્યાન ફક્ત એક વખત સહાય મળવા પાત્ર છે. જો એક થી વધુ વખત લાભ લીધેલ માલુમ પડશે તો કાયદેસરની કાર્યવાહી કરવામાં આવશે તેમજ ચુકવેલ નાણા વ્યાજ સહિત પરત લેવામાં આવશે</li>
+                        <li class="list-group-item">•	અધુરી વિગતે અને સંપુર્ણ બિડાણ સિવાય રજુ કરેલ અરજીપત્રક દારે કરવામાં આવશે</li>
+                        <li class="list-group-item">•	સહાય અન્વયે આખરી નિર્ણય વેલ્ફર કમિશ્નરશ્રીનો રહેશે. ન્યાયક્ષેત્ર અમદાવાદ રહેશે</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBDisabledChildrenSahayYojna" asp-action="AppPersonalDetails"> Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--આકસ્મિક સહાય યોજના -->
+    <div class="modal fade" id="schemeModalAccedental" tabindex="-1" aria-labelledby="schemeModalAccedental" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalAccedental">આકસ્મિક મૃત્યુ સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">• આકસ્મિક મૃત્યુ સહાય યોજના અન્વયે બોર્ડમાં નોંધાયેલ/ન નોંધાયેલા બાંધકામ શ્રમિકનું બાંધકામ સાઈટ પર ચાલુ કામે અકસ્માતે અવસાન થાય તો તેમના વારસદારને આકસ્મિક મૃત્યુ/ કાયમી અશક્તતાના કિસ્સામાં રૂ.૩,૦૦,૦૦૦/- સુધીની સહાય આપવામાં આવે છે.  </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="BOCWAccidentalSahayYojana" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--શૈક્ષણિક પુરસ્કાર યોજના (ધોરણ ૧0)-->
+    <div class="modal fade" id="schemeGLWBSSC" tabindex="-1" aria-labelledby="exampleModalLabel11" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary py-2">
+                    <h5 class="modal-title d-flex align-items-center w-100 justify-content-between flex-row-reverse" id="exampleModalLabel11">
+                        <img src="/assets/img/GLWBColorLogo.jpg" class="rounded-circle me-2" height="50" width="50">શ્રમયોગી શૈક્ષણિક પુરસ્કાર યોજના (ધોરણ ૧0)
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style=" filter: invert(1); "></button>
+                </div>
+
+                <div class="modal-body glwb_bg">
+                    <h6 class="fw-bold">યોજનાનો હેતુ :</h6>
+                    <ul class="custom-list">
+                        <li>ગુજરાત લેબર વેલ્ફેર એક્ટ ૧૯૫૩ અંતર્ગત ગુજરાત શ્રમયોગી ક્લલ્યાણ બોર્ડ દ્વારા સંગઠીત ક્ષેત્રના શ્રમયોગીઓ માટે વિવિધ કલ્યાણકારી પ્રવૃતિઓ કરવામાં આવે છે. </li>
+                    </ul>
+                    <h6 class="fw-bold">યોજનાનું વિવરણ :</h6>
+                    <ul class="custom-list">
+                        <li>જે શ્રમયોગીઓનો છેલ્લા એક વર્ષ નો લેબર વેલ્ફેર ફંડ અત્રેની કચેરી ખાતે ભરાયેલ હોય અને તેઓના બાળકો દ્વારા ધોરણ ૧૦ માં ૭૦ % થી વધુ પર્સેંન્ટાઇલ મેળવેલ હોય તેવા શ્રમયોગીઓને રૂ. ૨૫૦૦ ની આર્થીક સહાય </li>
+
+                    </ul>
+                    <h6 class="fw-bold">શરતો :</h6>
+                    <ul class="custom-list">
+                        <li>વર્ષ ૨૦૨૨ માં ધોરણ - ૧0 બોર્ડની પરીક્ષામા ઉતીર્ણ થયેલ અને જેમાં ૭૦ કે વધુ પર્સન્ટાઇલ મેળવનાર વિદ્યાર્થીઓને રૂ ૨,૫૦૦ =૦૦ શૈક્ષણીક પુરસ્કાર.</li>
+                        <li>આ યોજનાનો લાભ ગુજરાત રાજ્યમાં આવેલ કારખાના/સંસ્થામાં કામ કરતા શ્રમયોગીઓના બાળકોને  જ આપવામાં આવશે.</li>
+                        <li>વિદ્યાર્થીઓના વાલી જે કારખાના/ સંસ્થામાં કામ કરતા હોય તેમના દ્વારા સબંધિત વાલીનો છેલ્લા એક વર્ષનો લેબર વેલ્ફેર ફંડ અત્રેની કચેરી ખાતે ભરવામાં આવતો હોય તેમના બાળકો/વિદ્યાર્થીઓને આ યોજનાનો લાભ મળવાપાત્ર થશે.</li>
+                        <li>તા. ૨૮ ફેબ્રુઆરી ૨૦૨૩ સુધીમાં અરજી કરવાની રહેશે. ત્યારબાદ આવેલ અરજીઓ દફતરે કરવામાં આવશે.</li>
+                        <li>અધુરા દસ્તાવેજ/અધુરી વિગતે/ખોટી વિગતે/નિયત સમય મર્યાદા બાદ મળેલ અરજી  પત્રક દફ્તરે કરવામાં આવશે.</li>
+                        <li>માર્કશીટમાં દર્શાવેલ વિદ્યાર્થીના નામનો જ ચેક આપવામાં આવશે.</li>
+                        <li>કચેરીનો નિર્ણય આખરી ગણાશે. ન્યાય ક્ષેત્ર અમદાવાદ રહેશે.</li>
+
+                    </ul>
+
+                    <h6 class="fw-bold">બિડાણ :</h6>
+                    <ul class="custom-list">
+                        <li>માર્કશીટની નકલ સ્વયં પ્રમાણીત કરી બીડવાની રહેશે.</li>
+                        <li>વિદ્યાર્થીના બેંક પાસબુકના પ્રથમ પાનાની ઝેરોક્ષ.</li>
+                        <li>વિદ્યાર્થીના આધાર કાર્ડની નકલ</li>
+                        <li>શ્રમયોગીના આધારકાર્ડની નકલ</li>
+                        <li>શ્રમયોગી બોનાફાઈડ પ્રમાણપત્ર</li>
+                    </ul>
+
+                </div>
+                <div class="modal-footer bg-warning">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                    <a class="btn btn-primary" asp-controller="GLWBSSCPurashkarYojana" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+    @*modal start*@
+    <!--શ્રમયોગી શૈક્ષણિક પુરસ્કાર યોજના (ધોરણ ૧૨)-->
+    <div class="modal fade" id="schemeGLWBHSC" tabindex="-1" aria-labelledby="exampleModalLabel11" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary py-2">
+                    <h5 class="modal-title d-flex align-items-center w-100 justify-content-between flex-row-reverse" id="exampleModalLabel11">
+                        <img src="/assets/img/GLWBColorLogo.jpg" class="rounded-circle me-2" height="50" width="50">શ્રમયોગી શૈક્ષણિક પુરસ્કાર યોજના (ધોરણ ૧૨)
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style=" filter: invert(1); "></button>
+                </div>
+
+                <div class="modal-body glwb_bg">
+                    <h6 class="fw-bold">યોજનાનો હેતુ :</h6>
+                    <ul class="custom-list">
+                        <li>ગુજરાત લેબર વેલ્ફેર એક્ટ ૧૯૫૩ અંતર્ગત ગુજરાત શ્રમયોગી ક્લલ્યાણ બોર્ડ દ્વારા સંગઠીત ક્ષેત્રના શ્રમયોગીઓ માટે વિવિધ કલ્યાણકારી પ્રવૃતિઓ કરવામાં આવે છે. </li>
+                    </ul>
+                    <h6 class="fw-bold">યોજનાનું વિવરણ :</h6>
+                    <ul class="custom-list">
+                        <li>જે શ્રમયોગીઓનો છેલ્લા એક વર્ષ નો લેબર વેલ્ફેર ફંડ અત્રેની કચેરી ખાતે ભરાયેલ હોય અને તેઓના બાળકો દ્વારા ધોરણ ૧૨ માં ૭૦ % થી વધુ પર્સેંન્ટાઇલ મેળવેલ હોય તેવા શ્રમયોગીઓને રૂ. ૫૦૦૦ ની આર્થીક સહાય </li>
+
+                    </ul>
+                    <h6 class="fw-bold">શરતો :</h6>
+                    <ul class="custom-list">
+                        <li>વર્ષ : ૨૦૨૨ માં ધોરણ – ૧૨  બોર્ડની પરીક્ષામા ઉતીર્ણ થયેલ અને જેમાં ૭૦ કે વધુ પર્સન્ટાઇલ મેળવનાર વિદ્યાર્થીઓને રૂ ૫,૦૦૦=૦૦ શૈક્ષણીક પુરસ્કાર.</li>
+                        <li>આ યોજનાનો લાભ ગુજરાત રાજ્યમાં આવેલ કારખાના/સંસ્થામાં કામ કરતા શ્રમયોગીઓના બાળકોને  જ આપવામાં આવશે.</li>
+                        <li>વિદ્યાર્થીઓના વાલી જે કારખાના/ સંસ્થામાં કામ કરતા હોય તેમના દ્વારા સબંધિત વાલીનો છેલ્લા એક વર્ષનો લેબર વેલ્ફેર ફંડ અત્રેની કચેરી ખાતે ભરવામાં આવતો હોય તેમના બાળકો/વિદ્યાર્થીઓને આ યોજનાનો લાભ મળવાપાત્ર થશે.</li>
+                        <li>તા. ૨૮ ફેબ્રુઆરી ૨૦૨૩ સુધીમાં અરજી કરવાની રહેશે. ત્યારબાદ આવેલ અરજીઓ દફતરે કરવામાં આવશે.</li>
+                        <li>અધુરા દસ્તાવેજ/અધુરી વિગતે/ખોટી વિગતે/નિયત સમય મર્યાદા બાદ મળેલ અરજી  પત્રક દફ્તરે કરવામાં આવશે.</li>
+                        <li>માર્કશીટમાં દર્શાવેલ વિદ્યાર્થીના નામનો જ ચેક આપવામાં આવશે.</li>
+                        <li>કચેરીનો નિર્ણય આખરી ગણાશે. ન્યાય ક્ષેત્ર અમદાવાદ રહેશે.</li>
+
+                    </ul>
+
+                    <h6 class="fw-bold">બિડાણ :</h6>
+                    <ul class="custom-list">
+                        <li>માર્કશીટની નકલ સ્વયં પ્રમાણીત કરી બીડવાની રહેશે.</li>
+                        <li>વિદ્યાર્થીના બેંક પાસબુકના પ્રથમ પાનાની ઝેરોક્ષ.</li>
+                        <li>વિદ્યાર્થીના આધાર કાર્ડની નકલ</li>
+                        <li>શ્રમયોગીના આધારકાર્ડની નકલ</li>
+                        <li>શ્રમયોગી બોનાફાઈડ પ્રમાણપત્ર</li>
+                    </ul>
+
+                </div>
+                <div class="modal-footer bg-warning">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                    <a class="btn btn-primary" asp-controller="GLWBHSCPurashkarYojana" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+
+
+    @*modal start*@
+    <!--શ્રમયોગી સંપૂર્ણ તબીબી તપાસ યોજના -->
+    <div class="modal fade" id="GLWBTabibiSahay" tabindex="-1" aria-labelledby="schemeModalAccedental" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalAccedental">શ્રમયોગી સંપૂર્ણ તબીબી તપાસ યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            આ યોજનાનો લાભ જે શ્રમયોગીઓનો છેલ્લા ત્રણ વર્ષનો લેબર વેલ્ફેર ફંડ તેમની સંસ્‍થા/યુનીટ ધ્‍વારા નિયમીત રીતે
+                            ભરાયેલ હશે તેઓને જ મળવાપાત્ર થશે.
+                        </li>
+                        <li class="list-group-item">
+                            આ યોજના અંતર્ગત સંપૂર્ણ તબીબી તપાસના શ્રમયોગી દીઠ કુલ ખર્ચ રૂ ૨૦૦૦/- ના ૫૦% રકમ (રૂ.૧૦૦૦/-) સંસ્થા/ કંપનીએ
+                            સૈદ્ધાંતિક મંજુરી મળ્યાના દિન-૭ માં અત્રેની કચેરીએ “ગુજરાત લેબર વેલ્ફેર ફંડ” નાં નામનો ચેક જમા કરાવવાનો રહેશે
+                        </li>
+                        <li class="list-group-item">આ યોજનાનો લાભ વર્ષમાં એકજ વાર આપવામા આવશે</li>
+                        <li class="list-group-item">આ યોજના હેઠળ લાભ લેવા ઇચ્‍છુક કંપનીએ વેલ્‍ફેર કમિશ્‍નરને નિયત કરેલ અરજી પત્રકમાં લાભ લેવા માંગતા શ્રમયોગીઓની બીડાણ અનુ નં. ૨, ૩ તથા ૪ માં દર્શાવ્યા મુજબ A, B તથા C મુજબ ત્રણ અલગ નામની યાદી સાથે અરજી કરવાની રહેશે.</li>
+                        <li class="list-group-item"> શારીરિક તપાસ દરમ્યાન કોઈપણ પ્રકારની આડ અસરની જવાબદારી ગુજરાત શ્રમયોગી કલ્યાણ બોર્ડની રહેશે નહિ.</li>
+                        <li class="list-group-item">
+                            યોજનાનો લાભ લેવા એક માસ અગાઉ અરજી કરવાની રહેશે. ૫૦૦ થી વધુ શ્રમયોગીઓ ધરાવતી સંસ્થામાં કંપની ખાતે
+                            તબીબી તપાસની સેવા પૂરી પાડવામાં આવશે. ૫૦૦ થી ઓછા શ્રમયોગીઓ ધરાવતી સંસ્થામાં કંપની અને હોસ્પીટલની પરસ્પર સમજુતીથી તબીબી તપાસની સેવા પૂરી પાડવામાં આવશે.
+                        </li>
+                        <li class="list-group-item"> યોજના સંબધિત આખરી નિર્ણય વેલ્ફેર કમીશ્નરશ્રીનો રહેશે. ન્યાય ક્ષેત્ર અમદાવાદ રહેશે.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBTabibiSahay" asp-action="AppPersonalDetails"> Accept</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+
+
+    @*modal start*@
+    <!-- શ્રમયોગીઓના બાળકો માટે રમત ગમતમાં ભાગ લેવા બદલ પ્રોત્સાહન યોજના -->
+    <div class="modal fade" id="GLWBGameYojna" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">શ્રમયોગીઓના બાળકો માટે રમત ગમતમાં ભાગ લેવા બદલ પ્રોત્સાહન યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">આ યોજનાનો લાભ મેળવવા માટે શ્રમયોગીનો સંસ્થા દ્વારા છેલ્લા ત્રણ વર્ષનો લેબર વેલ્ફેર ફંડ કાપીને અત્રેની કચેરી ખાતે જમા કરવામાં આવેલ હોવો જોઈએ. </li>
+                        <li class="list-group-item">આ યોજના અંતર્ગત તાલુકા કમાએ ભાગ લેનાર વિદ્યાર્થીને રૂ. ૫,૦૦૦/- જિલ્લા સ્તરે 10,000 રાજ્ય સ્તરે રૂ. ૧૫,૦૦૦/ તથા રાષ્ટ્રિય સ્તરે રૂ 2000 રોકડ પુરસ્કાર આપવામાં આવશે.</li>
+                        <li class="list-group-item">ભારત સરકાર, રાજ્ય સરકાર અથવા સરકારી વિભાગ દ્વારા આયોજીત સ્પર્ધાઓ માટે જ સહાય મળવાપાત્ર છે. ૧. (૪) રમત-ગમત માં ભાગ લેવા બદલ આપવામાં આવેલ પ્રમાણપત્રમાં દર્શાવેલ તારીખ થી ૧(એક) વર્ષની અંદર સંપુર્ણ વિગતે દસ્તાવેજી પુરાવા સાથે અા કરવાની રહેશે</li>
+                        <li class="list-group-item">
+                            અધુરી વિગતે, સંપૂર્ણ બિહ્મણ સિવાય તથા સમયમર્યાદા બહાર રજુ કરેલ અરજીપત્રક દફ્તરે કરવામાં આવશે
+
+                        </li>
+                        <li class="list-group-item">સહાય અન્વયે આખરી નિર્ણય વેલ્ફર કમિશ્નરશ્રીનો રહેશે. ન્યાયક્ષેત્ર અમદાવાદ રહેશે</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBGameYojna" asp-action="AppPersonalDetails"> Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!-- શ્રમયોગી આકસ્મિક મૃત્યુ સહાય યોજના -->
+    <div class="modal fade" id="schemeGWLBAccidental" tabindex="-1" aria-labelledby="schemeGWLBAccidental" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelschemeGWLBAccidental">શ્રમયોગી અકસ્માત મૃત્યુ સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">• ગુજરાત શ્રમયોગી કલ્યાણ બોર્ડ દ્વારા સંગઠિત ક્ષેત્રમાં કામ કરતાં શ્રમયોગીઓ માટે વિવિધ કલ્યાણકારી યોજનાઓ હાથ ધરવામાં આવે છે જે અન્વયે જે શ્રમયોગીઓનો ફાળો અત્રેની કચેરી ખાતે નિયમિત રૂપે ભરાતો હોય તેવા શ્રમયોગીનુ ફેટલ એક્સિડેન્ટ થકિ મૃત્યુ પામેલ હોય તેવા શ્રમયોગીઓના કિસ્સામા પ્રથમ વારસદારને રૂ ૧ લાખની સહાય આપવામા આવે છે. </li>
+                        <li class="list-group-item">
+                            •Eligibility criteria
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">1.	Bonafide certificate</li>
+                                <li class="list-group-item">2.	Report of death from director of industrial safety and health</li>
+                                <li class="list-group-item">3.	Fir copy </li>
+                                <li class="list-group-item">4.	Application must be done within 2 years from actual date of accident </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBAccidentalSahayYojana" asp-action="AppPersonalDetails"> Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+
+
+
+
+
+
+    <div class="modal fade" id="popup1" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-x">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">યુઝરઆઇડી ભૂલી ગયા છો?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="control-label col-lg-6">
+                            આધાર નંબર:<span class="text-danger">*</span>
+                        </label>
+                        <div class="control-form col-lg-6">
+                            <input name="" type="text" class="form-control">
+                        </div>
+
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-lg-6">
+                            <br />
+                            જન્મ તારીખ:<span class="text-danger">*</span>
+                        </label>
+                        <div class="control-form col-lg-6">
+                            <input type="text" class="form-control datepicker1" placeholder="mm/dd/yyyy" />
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#popup1">
+
+                        યુઝર આઇડી મેળવો
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="popup2" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-x">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelTablet">એપ્લિકેશન સ્થિતિ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="control-label col-lg-6">
+                            અરજી નંબર :<span class="text-danger">*</span>
+                        </label>
+                        <div class="control-form col-lg-6">
+                            <input name="" type="text" class="form-control">
+                        </div>
+
+
+                    </div>
+                    <br />
+                    <div class="form-group row">
+                        <label class="control-label col-lg-6">
+                            જન્મ તારીખ :<span class="text-danger">*</span>
+                        </label>
+                        <div class="control-form col-lg-6">
+                            <input type="text" class="form-control datepicker1" placeholder="mm/dd/yyyy" />
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#popup2">
+
+                        સ્થિતિ જુઓ
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--Home Town Scheme Modal -->
+    <div class="modal fade" id="HomeTownSchemeDetailsModal" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel"> શ્રમયોગી હોમ ટાઉન યોજના </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            •	આ યોજના હેઠળ ભારત દેશના ગુજરાત સિવાય અન્ય રાજ્યમાંથી આવી ગુજરાતમાં કામ કરતા શ્રમયોગી તથા તેમના આશ્રિત (કુંટુબની વ્‍યાખ્‍યામાં આવતા) સભ્‍યો એટલે કે (અ) અરજદાર પોતે (બ) પતિ અથવા પત્‍ની (ક) બાળકો (ડ) આશ્રિત હોય તેવા માતા-પિતા (ઇ) આશ્રિત ભાઇ-બહેન (અપરણિત ભાઇ ૨૫ વર્ષ/ અપરણિત બહેન ૩૫ વર્ષ) જે  પૈકીના વધુમાં વધુ ૪ (ચાર) વ્‍યકિતની મર્યાદમાં વતનમાં જવા અને પરત આવવા માટે રેલ્‍વે (બીજો વર્ગ) નુ ભાડુ મળવાપાત્ર થશે.
+                        </li>
+
+                        <li class="list-group-item">
+                            શરતોઃ-
+                        </li>
+                        <li class="list-group-item">
+                            (૧	આ યોજનાનો લાભ જે શ્રમયોગીઓનો છેલ્લા બે વર્ષનો લેબર વેલ્ફેર ફંડ તેમની સંસ્‍થા/યુનીટ ધ્‍વારા નિયમીત રીતે ભરાયેલ હશે તેઓને જ મળવાપાત્ર થશે
+                        </li>
+                        <li class="list-group-item">(૨	આ યોજનાનો લાભ બે વર્ષના બ્‍લોકમાં એકજ વાર આપવામા આવશે હાલમાં બ્‍લોક વર્ષ:૨૦૨૨-૨૩ અને ૨૦૨૩-૨૪ રહેશે.    </li>
+                        <li class="list-group-item">(૩	પતિ/પત્‍ની બંને શ્રમયોગી હોય ય તો બંનેમાંથી એક લાભાર્થીને જ આ યોજનાનો લાભ મળશે  </li>
+                        <li class="list-group-item">(૪	આ યોજના હેઠળ લાભ લેવા ઇચ્‍છુક શ્રમયોગીઓએ વેલ્‍ફેર કમિશ્‍નરને નિયત કરેલ અરજી પત્રકમાં અરજી કરી લેખિત પુર્વ મંજુરી મેળવ્યા બાદ જ મુસાફરી કરવાની રહેશે.   </li>
+                        <li class="list-group-item">(૫	આ યોજનાનો લાભ પરપ્રાંતીય શ્રમયોગીઓને પોતાના વતનમાં જવા/આવવા માટે વતનના સૌથી નજીકના રેલ્વે સ્ટેશન સુધીના રેલ્વે ભાડાની રકમ ચુકવવામાં આવશે. (ટીકીટ રજુ કરવાની રહેશે.)    </li>
+                        <li class="list-group-item">
+                            (૬	શ્રમયોગીએ રજુ કરેલ વતનના પુરવામાં દર્શાવેલ સ્થળ માટે જ આ યોજનાઓ લાભ આપવામાં આવશે.
+                        </li>
+                        <li class="list-group-item">(૭	કચેરી દ્વારા આપવામાં આવેલ મંજુરીપત્રની સાથે જરુરી પુરાવા રજુ કરી કલેઇમ કરવો.     </li>
+                        <li class="list-group-item">(૮	ક્લેઇમ ઓડિટ કર્યા બાદ નાણાંની રકમ ચૂકવવામાં આવશે.   </li>
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBHomeTownYojana" asp-action="AppPersonalDetails">Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--Pravasan Scheme Modal -->
+    <div class="modal fade" id="pravasanSchemeDetailsModal" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel"> શ્રમયોગી પ્રવાસન યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            •	આ યોજના હેઠળ શ્રમયોગી તથા તેમના આશ્રિત (કુંટુબની વ્‍યાખ્‍યામાં આવતા) સભ્‍યો એટલે કે (અ) અરજદાર પોતે
+                            (બ) પતિ અથવા પત્‍ની (ક) બાળકો (ડ) આશ્રિત હોય તેવા માતા-પિતા (ઇ) આશ્રિત ભાઇ-બહેન (અપરણિત ભાઇ ૨૫ વર્ષ/ અપરણિત બહેન ૩૫ વર્ષ) જે  પૈકીના વધુમાં વધુ ૪ (ચાર) વ્‍યકિતની મર્યાદામાં લાભ આપવામાં આવશે.
+                        </li>
+                        <li class="list-group-item">•	અરજી પત્રક કચેરીને પ્રવાસ શરુ થવાની તારીખના ૨૦ દિવસ પહેલા રજુ કરવાનું રહેશે. (ત્યારબાદની અરજી ધ્યાને લેવામાં આવશે નહિ)  </li>
+                        <li class="list-group-item">
+                            •	આ યોજનાનો લાભ શ્રમયોગીઓ જે નાણાકીય વર્ષમાં મેળવવા ઇચ્‍છતા હોય તે નાણાકીય વર્ષ અગાઉના સળંગ ત્રણ
+                            વર્ષ દરમ્‍યાન તેમની સંસ્‍થા/યુનીટ ધ્‍વારા લેબર વેલ્‍ફેર ફંડ નિયમીત રીતે ભરાયેલ હશે તેવી જ સંસ્‍થા/યુનીટના શ્રમયોગીઓને આ લાભ મળવાપાત્ર થશે.
+                        </li>
+                        <li class="list-group-item">•	આ યોજનાનો લાભ બે વર્ષના બ્‍લોકમાં એકજ વાર આપવામા આવશે હાલમાં બ્‍લોક વર્ષ:૨૦૧૮-૧૯ અને ૨૦૧૯-૨૦ રહેશે.(ત્યારપછીનો બ્લોક દા.ત. વર્ષ:૨૦૨૦-૨૧ અને ૨૦૨૧-૨૨ રહેશે.)   </li>
+                        <li class="list-group-item">•	પતિ/પત્‍ની બંને શ્રમયોગી હોય તો બંનેમાંથી એક લાભાર્થીનેજ આ યોજનાનો લાભ મળશે.   </li>
+                        <li class="list-group-item">•	આ યોજના હેઠળ લાભ લેવા ઇચ્‍છુક શ્રમયોગીઓએ વેલ્‍ફેર કમિશ્‍નરને નિયત કરેલ અરજી પત્રકમાં અરજી કરી લેખિત પુર્વ મંજુરી મેળવ્યા બાદ જ પ્રવાસ કરવાનો રહેશે.   </li>
+                        <li class="list-group-item">•	આ યોજનાનો લાભ દર્શાવેલ સ્‍થળો પૈકી કોઇપણ એક સ્‍થળ પુરતો જ મર્યાદીત રહેશે. પ્રવાસ સ્‍થળે જવા/આવવા માટે એસ.ટીનો ઉપયોગ કરવામાં આવ્યો હોય તો એસ.ટી ભાડુ અને રેલ્‍વેનો ઉપયોગ કરવામાં આવ્યો હોય તો રેલ્વે ભાડાની રકમ ચુકવવામાં આવશે.(ટીકીટ રજુ કરવાની રહેશે.) રેલ્વે/એસ.ટી.માં A.C.નું ભાડું ચુકવવામાં આવશે નહિ.   </li>
+                        <li class="list-group-item">•	ખાનગી/ભાડેથી વાહનમાં મુસાફરી કરવામાં આવે તેવા કિસ્‍સામાં બીલ/ટીકીટ રજુ કર્યેથી પ્રવાસના સ્‍થળે જવા માટે રાજય સરકાર સંચાલિત સડક વાહન ભાડાની મર્યાદામાં નાણાં ચુકવવામાં આવશે.   </li>
+                        <li class="list-group-item">•	જે સ્થળે પ્રવાસ જવાની મંજુરી આપવામાં આવેલ છે તે જ સ્થળે રાત્રી રોકાણ કરવાનું રહેશે. અન્ય સ્થળે રાત્રી રોકાણ કરેલ હશે તો રાત્રી રોકાણના નાણાં ચુકવવામાં આવશે નહીં.    </li>
+                        <li class="list-group-item">•	આ યોજના હેઠળ રાત્રી રોકાણનાં એક વ્યકિત દીઠ રુ.૫૦૦/- ની મર્યાદામાં હોટલ/ઘર્મશાળામાં રહેવાનું ભાડુ ચુકવવામાં આવશે. પ્રવાસના સ્થળે રાત્રી રોકાણનો પુરાવો (હોટલ ઘર્મશાળા વગેરેમાં રાત્રી રોકાણ કર્યાનો) રજુ કરવાનો રહેશે.   </li>
+                        <li class="list-group-item">•	સંસ્થા ઘ્વારા સુઆયોજન સ્વરુપે દરેક શ્રમયોગીઓને પ્રવાસ લઇ જવા માંગતા હોય તેવા કિસ્સામાં અરજી ફોર્મમાં દર્શાવેલ શ્રમયોગીઓના લીસ્ટના નમુના મુજબ વિગત કંપનીના લેટરપેડ ઉપર અલગથી રજુ કરવાની રહેશે. અનુક્રમ નં ૫-અ માં દર્શાવ્યા મુજબ પુરાવા પણ રજુ કરવાના રહેશે.   </li>
+                        <li class="list-group-item">•	કંપની ઘ્‍વારા સુઆયોજન સ્‍વરુપે તેઓની સંસ્‍થામાં કામ કરતા દરેક શ્રમયોગી વતી એક જ ફોર્મમાં અરજી કરવામાં આવે અને કર્મચારીઓ વતી ભાડુ તથા રાત્રી રોકાણનો ખર્ચ કંપની દ્વારા ચુકવવામાં આવે તેવા કિસ્‍સામાં અત્રેથી ચુકવવામાં આવતી ભાડાની રકમ તથા રાત્રી રોકાણ ખર્ચની રકમ સંબધિત કંપનીને ચુકવવામાં આવશે. (બીલો રજુ કરવાના રહેશે.).   </li>
+                        <li class="list-group-item">•	સંસ્‍થા ઘ્‍વારા શ્રમયોગીઓને પ્રવાસ લઇ જવામાં આવે ત્યારે તેમણે ફોર્મમાં દર્શાવેલ નમુના મુજબ બેનર વાહન ઉપર લગાવવાનું રહેશે. અને તેના ફોટોગ્રાફસ આપવાના રહેશે.   </li>
+                        <li class="list-group-item">•	સ્ટેચ્યુ ઓફ યુનિટી ખાતે પ્રવાસ દરમ્યાન  વ્યુઈંગ ગેલેરીની ટીકીટનો દર રૂ.૩૫૦/- ની મર્યાદામાં ટીકીટ રજુ કર્યેથી ચુકવવામાં આવશે.   </li>
+                        <li class="list-group-item">•	પ્રવાસ પુર્ણ થયા બાદ ૧૫ દિવસની અંદર અત્રેની કચેરી દ્વારા આપવામાં આવેલ મંજુરીપત્રની સાથે બીલો તથા જરુરી પુરાવા રજુ કરી કલેઇમ કરવો.   </li>
+                        <li class="list-group-item">•	અધૂરી વિગતે અને સંપૂણ બીડાણ સિવાય રજુ કરેલ ફોર્મ દફતરે કરવામાં આવશે. સહાય અન્વયે આખરી નિર્ણય વેલ્ફેર કમિશ્નરશ્રીનો રહેશે. ન્યાયક્ષેત્ર અમદાવાદ રહેશે.   </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBPravasanYojana" asp-action="AppPersonalDetails">Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+
+
+
+    @*modal start*@
+    <!--રમત ગમત કાર્યક્રમ માટેનું અરજી પત્રક -->
+    <div class="modal fade" id="GLWBRamatGamatSpardha" tabindex="-1" aria-labelledby="schemeGWLBAccidental" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelschemeGWLBAccidental">રમત ગમત કાર્યક્રમ માટેનું અરજી પત્રક</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">સંસ્થા દ્વારા છેલ્લા ત્રણ વર્ષથી નિયમિત પણે લેબર વેલ્ફેર ફંડ ભરાયેલ હોવો જોઇએ </li>
+                        <li class="list-group-item">સંસ્થા દ્વારા આ યોજનાનો લાભ લીધા બાદ ત્રણ વર્ષ સુધી આ યોજનાનો લાભ બીજી વાર મળી શકશે નહી. </li>
+                        <li class="list-group-item">
+                            કાર્યક્રમ ની મંજુરી માટે કાર્યક્રમના ૨૦ દિવસ પહેલા અત્રેની કચેરીને અરજી રજુ કરવાની રહેશે. કચેરી દ્વારા સૈદ્ધાંતિક મંજૂરી 	મેળવ્યા 	બાદ જ કાર્યક્રમ 	યોજવાનો રહેશે, તથા કાર્યક્રમની તારીખ અને સમય અંગે અત્રેની કચેરીને અગાઉથી લેખિતમા 	જાણ કરવાની રહેશે જેથી અત્રેની કચેરીના પ્રતિનિધિ કાર્યક્રમમા ઉપસ્થિત રહી શકે.
+                        </li>
+                        <li class="list-group-item">
+                            સદર મંજુર થયેલ નાણા મંજૂર થયેલ રકમ માટે જ ખર્ચ કરવાના રહેશે. જો કાર્યક્રમ મુલત્વી રાખવામા આવે/તારીખમા 	ફેરફાર 	કરવાનો થાય તેવા સંજોગોમા કચેરીને લેખીત જાણ કરી પુન: મંજૂરી મેળવ્યા બાદ કાર્યક્રમ યોજવો.
+                        </li>
+                        <li class="list-group-item">
+                            સંસ્થા દ્વારા ૬’ x ૪’ ના કચેરીના સહયોગ અંગેના ચાર (૪) બેનર લગાવવના રહેશે. તથા કાર્યક્રમના દસ (૧૦) કે તેથી વધુ 	ફોટોગ્રાફ્સની હાર્ડકોપી બીલ સાથે મોકલવાની રહેશે.
+                        </li>
+                        <li class="list-group-item">
+                            કાર્યક્રમ પુર્ણ થયે દિન – ૧૫ માં બીલ રજુ કરવાનુ રહેશે. ખર્ચના બીલોની પ્રમાણિત નકલ રજુ કર્યેથી થયેલ ખર્ચની રકમ 	ફોર્મમાં 	દર્શાવેલ ક્રમાંક ૭-અ, ૭-બ, અને ૭-ક માં કરવામાં આવેલ વર્ગીકરણ મુજબ ચૂકવવામાં આવશે.
+                        </li>
+                        <li class="list-group-item">અધૂરી વિગતે રજૂ થયેલ અરજી પત્રક દફતરે કરવામાં આવશે. </li>
+                        <li class="list-group-item">સંસ્થા દ્વારા શરતનો ભંગ થયેથી સહાય ચૂકવવામાં આવશે નહીં. </li>
+                        <li class="list-group-item">સહાય અન્વયે આખરી નિર્ણય વેલ્ફેર કમિશ્ર્નરશ્રીનો રહેશે. ન્યાયક્ષેત્ર અમદાવાદ રહેશે. </li>
+
+
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBRamatGamatSpardha" asp-action="AppPersonalDetails"> Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+    @*modal start*@
+    <!--વિવિશિષ્ટ કાર્યક્ર્મ માટેનુ અરજી પત્રક -->
+    <div class="modal fade" id="GLWBVIshishtKarykram" tabindex="-1" aria-labelledby="schemeGWLBAccidental" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelschemeGWLBAccidental">વિશિષ્ટ કાર્યક્રમ માટેનુ અરજી પત્રક</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">સંસ્થા દ્વારા છેલ્લા ત્રણ વર્ષથી નિયમિત પણે લેબર વેલ્ફેર ફંડ ભરાયેલ હોવો જોઇએ </li>
+                        <li class="list-group-item">સંસ્થા દ્વારા આ યોજનાનો લાભ લીધા બાદ ત્રણ વર્ષ સુધી આ યોજનાનો લાભ બીજી વાર મળી શકશે નહી. </li>
+                        <li class="list-group-item">
+                            કાર્યક્રમ ની મંજુરી માટે કાર્યક્રમના ૨૦ દિવસ પહેલા અત્રેની કચેરીને અરજી રજુ કરવાની રહેશે. કચેરી દ્વારા સૈદ્ધાંતિક મંજૂરી 	મેળવ્યા 	બાદ જ કાર્યક્રમ 	યોજવાનો રહેશે, તથા કાર્યક્રમની તારીખ અને સમય અંગે અત્રેની કચેરીને અગાઉથી લેખિતમા 	જાણ કરવાની રહેશે જેથી અત્રેની કચેરીના પ્રતિનિધિ કાર્યક્રમમા ઉપસ્થિત રહી શકે.
+                        </li>
+                        <li class="list-group-item">
+                            સદર મંજુર થયેલ નાણા મંજૂર થયેલ રકમ માટે જ ખર્ચ કરવાના રહેશે. જો કાર્યક્રમ મુલત્વી રાખવામા આવે/તારીખમા 	ફેરફાર 	કરવાનો થાય તેવા સંજોગોમા કચેરીને લેખીત જાણ કરી પુન: મંજૂરી મેળવ્યા બાદ કાર્યક્રમ યોજવો.
+                        </li>
+                        <li class="list-group-item">
+                            સંસ્થા દ્વારા ૬’ x ૪’ ના કચેરીના સહયોગ અંગેના ચાર (૪) બેનર લગાવવના રહેશે. તથા કાર્યક્રમના દસ (૧૦) કે તેથી વધુ 	ફોટોગ્રાફ્સની હાર્ડકોપી બીલ સાથે મોકલવાની રહેશે.
+                        </li>
+                        <li class="list-group-item">
+                            કાર્યક્રમ પુર્ણ થયે દિન – ૧૫ માં બીલ રજુ કરવાનુ રહેશે. ખર્ચના બીલોની પ્રમાણિત નકલ રજુ કર્યેથી થયેલ ખર્ચની રકમ 	ફોર્મમાં 	દર્શાવેલ ક્રમાંક ૭-અ, ૭-બ, અને ૭-ક માં કરવામાં આવેલ વર્ગીકરણ મુજબ ચૂકવવામાં આવશે.
+                        </li>
+                        <li class="list-group-item">અધૂરી વિગતે રજૂ થયેલ અરજી પત્રક દફતરે કરવામાં આવશે. </li>
+                        <li class="list-group-item">સંસ્થા દ્વારા શરતનો ભંગ થયેથી સહાય ચૂકવવામાં આવશે નહીં. </li>
+                        <li class="list-group-item">સહાય અન્વયે આખરી નિર્ણય વેલ્ફેર કમિશ્ર્નરશ્રીનો રહેશે. ન્યાયક્ષેત્ર અમદાવાદ રહેશે. </li>
+
+
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBVIshishtKarykram" asp-action="AppPersonalDetails"> Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+
+    @*modal start*@
+    <!--શ્રમયોગી આકસ્મિક સહાય યોજના -->
+    <div class="modal fade" id="schemeGWLBAccidentalDisability" tabindex="-1" aria-labelledby="schemeGWLBAccidentalDisability" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabelschemeGWLBAccidentalDisability">શ્રમયોગી અકસ્માત સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        @*<li class="list-group-item">• Under the act of Gujarat labour Welfare Board act 1953 Gujarat labour welfare board running various welfare scheme for registered labour across the Gujarat. For uplifting living standard of the labour of the state the welfare activities in terms of educational, social, economical welfare of the laboures and their dependents covered under the act. </li>
+                        <li class="list-group-item">• Under the scheme whoes labour welfare fund regularly deposited to GLWB and if employee get accident on work place on work time then up to 50000 Rs benefit</li>*@
+                        <li class="list-group-item">• ગુજરાત લેબર વેલ્ફેર એક્ટ ૧૯૫૩ અંતર્ગત ગુજરાત શ્રમયોગી ક્લ્યાણ બોર્ડ દ્વારા સંગઠીત ક્ષેત્રના શ્રમયોગીઓ માટે વિવિધ કલ્યાણકારી પ્રવૃતિઓ કરવામાં આવે છે.</li>
+                        <li class="list-group-item">• આ યોજના અંતર્ગત શ્રમયોગીને તેમના કાર્યના સમય દરમ્યાન કાર્ય સ્થળ ઉપર દુર્ઘટના થાય અને તેના કારણે અપંગ થાય તેવા કિસ્સાઓમાં શારીરીક રીતે ૪૦% થી ૭૦% તેમજ  ૭૦% થી વધુ ડિસેબીલીટી માટે સિવિલ સર્જન/ મેડિકલ બોર્ડનુ ડોકટરી પ્રમાણ પત્ર રજુ કર્યેથી શ્રમયોગીને અનુક્રમે  રૂ. ૨૫,૦૦૦/- અને રૂ. ૫૦,૦૦૦/- આર્થિક સહાય મળવા પાત્ર છે જેમાથી ૫૦% રકમ સંસ્થાએ ચુકવવાની રહેશે</li>
+                        <li class="list-group-item">
+                            •નિયમો:
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">શ્રમયોગીનો સંસ્થા દ્વારા છેલ્લા ત્રણ વર્ષનો લેબર વેલ્ફેર ફંડ કાપીને અત્રેની કચેર્રી ખાતે જમા કરવામાં આવેલ હશે તો જ યોજનાનો લાભ મળવાપાત્ર થશે.</li>
+                                <li class="list-group-item">અકસ્માત થયેથી ૨ વર્ષની અંદર અરજી કરવાની રહેશે. ત્યારબાદ અરજીપત્રક સ્વીકારવામાં આવશે નહિ/ દફ્તરે કરવામાં આવશે. </li>
+                                <li class="list-group-item">આ યોજના અંતર્ગત શ્રમયોગીને તેમના કાર્યના સમય દરમ્યાન કાર્ય સ્થળ ઉપર દુર્ઘટના થાય અને તેના કારણે અપંગ થાય તેવા કિસ્સાઓમાં શારીરીક રીતે ૪૦% થી ૭૦% તેમજ  ૭૦% થી વધુ ડિસેબીલીટી માટે સિવિલ સર્જન/ મેડિકલ બોર્ડનુ ડોકટરી પ્રમાણ પત્ર રજુ કર્યેથી શ્રમયોગીને અનુક્રમે રૂ. ૨૫,૦૦૦/- અને રૂ. ૫૦,૦૦૦/- આર્થિક સહાય મળવા પાત્ર છે જેમાથી ૫૦% રકમ સંસ્થાએ ચુકવવાની રહેશે. </li>
+                                <li class="list-group-item">સંસ્થા દ્વારા કાયદાકિય રીતે ચુકવવા પાત્ર રકમ ઉપરાંત આ યોજના અંતર્ગત ૪૦% થી ૭૦% ડિસેબીલીટીના કિસ્સામા સંસ્થાના માલિક દ્વારા  રૂ. ૧૨,૫૦૦/- તથા ૭૦% થી વધુ ડિસેબીલીટી ના કિસ્સામા રૂ.૨૫,૦૦૦/- ચુકવ્યા બાદ બોર્ડ દ્વારા સહાયની રકમનુ ચુકવણુ કરવામાં આવશે</li>
+                                <li class="list-group-item">શ્રમયોગીએ સંસ્થા દ્વારા ચુકવેલ ઉકત રકમ અંગેનો પુરાવો રજુ કરવાનો રહેશે.</li>
+                                <li class="list-group-item">અધુરી વિગત અને સંપુર્ણ બિડાણ સિવાય રજુ કરેલ અરજીપત્રક દફ્તરે કરવામાં આવશે.</li>
+                                <li class="list-group-item">સહાય અન્વયે  આખરી નિર્ણય વેલ્ફેર કમિશ્ર્નરશ્રીનો રહેશે. ન્યાયક્ષેત્ર અમદાવાદ રહેશે.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" asp-controller="GLWBAccidentalDisabilitySahayYojana" asp-action="AppPersonalDetails"> Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*modal end*@
+
+
+
+    <p class="abc"></p>
+
+
+
+
+    <!-- Vendor JS Files -->
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/vendor/aos/aos.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+
+    <!-- Template Main JS File -->
+    <script src="~/assets/js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+            $('.js-example-basic-multiple').select2();
+
+            $('.datepicker1').datepicker({
+                todayHighlight: true,
+            });
+
+            $('.DataTable').DataTable();
+        });
+
+        //lnk_filter0   Constructions   Labour
+        $(".lnk_filter0").click(function() {
+            $(".constructions, .labour, .educational").show();
+        });
+        $(".lnk_filter1").click(function() {
+            $(".labour").show();
+            $(".constructions").hide();
+            $(".educational").hide();
+        });
+        $(".lnk_filter2").click(function() {
+            $(".labour").hide();
+            $(".constructions").show();
+            $(".educational").hide();
+        });
+        $(".lnk_filter3").click(function() {
+            $(".labour").hide();
+            $(".constructions").hide();
+            $(".educational").show();
+        });
+
+
+        //Font Increse-decrease
+        var $affectedElements = $("p, h1, h2, h3, h4, h5, h6, span, small"); // Can be extended, ex. $("div, p, span.someClass")
+
+        // Storing the original size in a data attribute so size can be reset
+        $affectedElements.each(function() {
+            var $this = $(this);
+            $this.data("orig-size", $this.css("font-size"));
+        });
+
+        $("#btn-increase").click(function() {
+            changeFontSize(1);
+        });
+
+        $("#btn-decrease").click(function() {
+            changeFontSize(-1);
+        });
+
+        $("#btn-orig").click(function() {
+            $affectedElements.each(function() {
+                var $this = $(this);
+                $this.css("font-size", $this.data("orig-size"));
+            });
+        });
+
+        function changeFontSize(direction) {
+            $affectedElements.each(function() {
+                var $this = $(this);
+                $this.css("font-size", parseInt($this.css("font-size")) + direction);
+            });
+        }
+        function getSchemeDescription(serviceId, divId) {
+            var objData = new Object()
+            objData.ServiceId = serviceId;
+            $.ajax({
+                type: "GET",
+                url: "/Home/GetSchemeDescription",
+                data: { ServiceId: serviceId },
+                //data: JSON.stringify(objData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                traditional: true,
+                success: function(response) {
+                    $("#" + divId).find("#divContent").html(response);
+                    $("#" + divId).modal('show');
+                },
+                failure: function(response) {
+                    alert(response.responseText);
+                },
+                error: function(response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+
+        function getBrowserClose() {
+            $.ajax({
+                type: "POST",
+                url: "/Account/BrowserClose",
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function(response) {
+                    debugger
+
+                },
+                failure: function(response) {
+                    alert(response.responseText);
+                },
+                error: function(response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+    </script>
+
+
+    @*@RenderSection("Scripts", required: false)*@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

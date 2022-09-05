@@ -1,0 +1,614 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@using LabourCommissioner.Common
+@using Newtonsoft.Json
+@model Registration
+@{
+    ViewData["Title"] = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //if (TempData["Message"] !=null)
+    //{
+    //    var objResMsg = (IEnumerable<ResponseMessage>)TempData["Message"];
+    //}
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero2">
+    <h2 class="animate__animated animate__fadeInDown">Registration Worker</h2>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+    @*<p>Hello, world - my name is  and the current date is: @DateTime.Now.ToString()</p>*@
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services services2">
+        <div class="container">
+
+            <div class="section-title pt-5 pb-4 text-start">
+                <h2 class="mb-0">યુઝરની નોંધણીની વિગતો</h2>
+                @*<p>Hello, world - my name is @name  and the current date is: @DateTime.Now.ToString()</p>*@
+
+            </div>
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <form enctype="multipart/form-data" method="post" asp-controller="Registration" asp-action="AddRegistration">
+                <input asp-for="RegistrationId" type="hidden" />
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-2 bg-primary d-flex justify-content-between">
+                                <span class="text-white"><i class='bx bxs-pencil align-middle'></i> <small> ( * marks fields are Mandatory)</small> </span>
+                                @* <a href="grid.html" class="f500 text-white"> <i class='bx bx-list-ul align-middle'></i> Go to View Page</a>*@
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <div class="form-horizontal form-bordered">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-2">
+                                                    આધારકાર્ડ નંબર <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="regunique.UniqueIdnumber" class="form-control" id="txtAadharCardNumber" autocomplete="off" />
+                                                    <span asp-validation-for="regunique.UniqueIdnumber" class="text-danger"></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label asp-for="BeneficiaryType" class="control-label col-md-2">
+                                                    યુઝરનો પ્રકાર<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <select asp-for="BeneficiaryType" class="form-select form-control" id="BeneficiaryType" aria-label="Default select example">
+                                                        <option selected>--- Please Select ---</option>
+                                                        <option value="1">બાંધકામ શ્રમિક</option>
+                                                        <option value="2">કારખાના/સંસ્થા શ્રમયોગી</option>
+
+                                                    </select>
+                                                    <span asp-validation-for="BeneficiaryType" class="text-danger"></span>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row" style="display:none;" id="divLWF">
+                                                <span class="control-label col-md-2">
+                                                    લેબર વેલ્ફેર ફંડ એકાઉન્ટ નંબર  :  <span class="text-danger">*</span>
+                                                </span>
+                                                <div class="control-form col-md-2">
+                                                    <input asp-for="LWBAccountNo" type="text" maxlength="100" id="LWBAccountNo" class="form-control">
+                                                </div>
+
+                                                <div class="control-form col-md-2">
+                                                    <button type="button" class="btn btn-sm btn-primary pl-3 pr-3" id="btnLWB">Fetch</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" style="display:none;" id="divENC">
+                                                <span class="control-label col-md-2">
+                                                    ઈ-નિર્માણ કાર્ડ નંબર :  <span class="text-danger">*</span>
+                                                </span>
+                                                <div class="control-form col-md-2">
+                                                    <input asp-for="ENirmanCardNo" type="text" maxlength="10" id="txtENirmanCardNo" class="form-control">
+                                                </div>
+
+                                                <div class="control-form col-md-2">
+                                                    <button type="button" class="btn btn-sm btn-primary pl-3 pr-3" id="btnENC">Fetch</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+                            @*<button class="btn btn-sm btn-primary pl-3 pr-3">Back</button>*@
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" id="divUserDetails" style="display:none;">
+
+
+
+                     <div class="row" id="divGLWBUserDetails" style="display:none;">
+                    <div class="col">
+                        <div class="card shadow mb-4">
+
+                            <div class="card-header py-2 bg-primary d-flex justify-content-between">
+                                <span class="text-white"><i class='bx bxs-pencil align-middle'></i>  <small> Organisation Details</small> </span>
+                                @*<a href="grid.html" class="f500 text-white"> <i class='bx bx-list-ul align-middle'></i> Go to View Page</a>*@
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <div class="form-horizontal form-boarderd">
+                                            <div class="form-group" row>
+                                               @* <input asp-for="OrganizationName" type="hidden" />
+                                                <input asp-for="OrganizationEmail" type="hidden" />
+                                                <input asp-for="OrganizationAddress" type="hidden" />
+                                                <input asp-for="OrganizationCity" type="hidden" />
+                                                <input asp-for="OrganizationDistrict" type="hidden" />
+                                                <input asp-for="OrganizationTaluka" type="hidden" />
+                                                <input asp-for="OrganizationPinCode" type="hidden" />*@
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label asp-for="OrganizationName" class="control-label col-md-2">
+                                                    સંસ્થા નુ નામ <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="OrganizationName" class="form-control" autocomplete="off" readonly="readonly" />
+                                                    <span asp-validation-for="OrganizationName" class="text-danger"></span>
+                                                </div>
+                                                <label asp-for="OrganizationEmail" class="control-label col-md-2">
+                                                    સંસ્થા નુ ઇમેઇલ આઈડી
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="OrganizationEmail" type="text" class="form-control" readonly="readonly">
+                                                    <span asp-validation-for="OrganizationEmail" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label asp-for="OrganizationAddress" class="control-label col-md-2">
+                                                    સંસ્થા નુ સરનામું<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="OrganizationAddress" type="text" class="form-control" readonly="readonly">
+                                                    <span asp-validation-for="OrganizationAddress" class="text-danger"></span>
+                                                </div>
+                                                <label asp-for="OrganizationCity" class="control-label col-md-2">
+                                                    શહેર
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="OrganizationCity" type="text" class="form-control" readonly="readonly">
+                                                    <span asp-validation-for="OrganizationCity" class="text-danger"></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label asp-for="OrganizationDistrict" class="control-label col-md-2">
+                                                    જિલ્લો <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="OrganizationDistrict" type="text" class="form-control" readonly="readonly">
+                                                    <span asp-validation-for="OrganizationDistrict" class="text-danger"></span>
+                                                </div>
+                                                <label asp-for="OrganizationTaluka" class="control-label col-md-2">
+                                                    તાલુકો<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="OrganizationTaluka" type="text" class="form-control" readonly="readonly">
+                                                    <span asp-validation-for="OrganizationTaluka" class="text-danger"></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label asp-for="OrganizationPinCode" class="control-label col-md-2">
+                                                    પીન કોડ <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="OrganizationPinCode" type="text" class="form-control" readonly="readonly">
+                                                    <span asp-validation-for="OrganizationPinCode" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="col">
+                        <div class="card shadow mb-4">
+
+                            <div class="card-header py-2 bg-primary d-flex justify-content-between">
+                                <span class="text-white"><i class='bx bxs-pencil align-middle'></i>  <small> User Details</small> </span>
+                                @*<a href="grid.html" class="f500 text-white"> <i class='bx bx-list-ul align-middle'></i> Go to View Page</a>*@
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <div class="form-horizontal form-boarderd">
+                                            <div class="form-group" row>
+                                                <input asp-for="FirstCardIssuedDate" type="hidden" />
+                                                <input asp-for="CDistrictId" type="hidden" />
+                                                <input asp-for="ICardFromDate" type="hidden" />
+                                                <input asp-for="ICardToDate" type="hidden" />
+
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <input asp-for="RegistrationNo" type="hidden" />
+                                                @* <input asp-for="EmployeeId" type="hidden" />*@
+                                                <label asp-for="Name" class="control-label col-md-2">
+                                                    પૂરું નામ <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="Name" class="form-control" autocomplete="off" />
+                                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-2">
+                                                    લિંગ<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    @*<div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                                    </div>*@
+
+                                                    @*@foreach (var item in Model.Gender)
+                                                    {
+                                                    <input asp-for="gender" type="radio" value="@item.Value" class="form-check-input" /> <label class="form-check-label"> @item.Text</label>
+                                                    }*@
+
+                                                    <input asp-for="Gender" type="radio" class="form-check-input" value="0" checked />Male<br />
+                                                    <input asp-for="Gender" type="radio" class="form-check-input" value="1" />Female
+                                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                                </div>
+                                                <label class="control-label col-md-2">
+                                                    જન્મ તારીખ<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    @*<input asp-for="DateOfBirth" type="text" class="form-control datepicker" autocomplete="off" placeholder="dd/MM/yyyy"  max="@DateTime.Now.ToString("dd/MM/yyyy")" />*@
+
+                                                    <input asp-for="DateOfBirth" type="date" class="form-control" autocomplete="off" placeholder="dd/MM/yyyy"
+                                                           max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-2">
+                                                    મોબાઈલ નંબર<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="MobileNo" type="text" class="form-control">
+                                                    <span asp-validation-for="MobileNo" class="text-danger"></span>
+                                                </div>
+                                                <label class="control-label col-md-2">
+                                                    ઇમેઇલ આઈડી
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="EmailId" type="text" class="form-control">
+                                                    <span asp-validation-for="EmailId" class="text-danger"></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-2">
+                                                    પાસવર્ડ <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="Password" type="password" class="form-control">
+                                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                                </div>
+                                                <label class="control-label col-md-2">
+                                                    પાસવર્ડ ફરીથી લખો<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="control-form col-md-4">
+                                                    <input asp-for="ConfirmPassword" type="password" class="form-control">
+                                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer text-center">
+                                        @*<button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">નોંધણી કરો</button>*@
+                                        <button type="submit" class="btn btn-primary">
+                                            @(Model.RegistrationId != 0 ? "Update" : "Create")
+                                        </button>
+                                        &nbsp;&nbsp;
+                                        @if (Model.RegistrationId == 0)
+                                        {
+                                            <a asp-action="Add" class="btn btn-secondary">Cancel</a>
+                                        }
+                                        else
+                                        {
+                                            <button asp-action="ViewDetails" type="button"
+                                                class="btn btn-secondary cancel" formmethod="post">
+                                                Cancel
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+            </form>
+        </div>
+
+
+    </section><!-- End Services Section -->
+
+
+
+</main><!-- End #main -->
+@section Scripts {
+    <script src="~/js/Common.js"></script>
+    <script type="text/javascript">
+        //Get Documet Ready
+        $(document).ready(function() {
+            var msg = '@TempData["Message"]';
+            if (msg != null && msg != '') {
+                //ShowDynamicSwalAlert("Registration",msg)
+
+                swal({
+                    title: title,
+                    text: msg,
+                    type: "warning",
+                    showCancelButtonClass: "btn-primary",
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+
+        //Hide Show Div Based on User Type
+        $("#BeneficiaryType").change(function() {
+            $("#divUserDetails").hide();
+            $("#divGLWBUserDetails").hide();
+
+            if ($(this).val() === "1") {
+                $("#divLWF").hide();
+                $("#divENC").show();
+               
+                
+                $("#OrganizationName").val('');
+                $("#OrganizationEmail").val('');
+                $("#OrganizationAddress").val('');
+                $("#OrganizationCity").val('');
+                $("#OrganizationDistrict").val('');
+                $("#OrganizationTaluka").val('');
+                $("#OrganizationPinCode").val('');
+                $("#LWBAccountNo").val('');
+                
+
+
+            } else if ($(this).val() === "2") {
+                $("#divLWF").show();
+                $("#divENC").hide();
+                
+
+
+                $("#Name").val('');
+                $("#DateOfBirth").val('');
+                $("#MobileNo").val('');
+                $("#EmailId").val('');
+                $("#Password").val('');
+                $("#ConfirmPassword").val('');
+                $("#txtENirmanCardNo").val('');
+                
+            }
+        });
+
+
+        //Get Enirman Card Details From Enirman card Number
+        $("#btnENC").click(function(e) {
+            var $d = $('#txtENirmanCardNo');
+            var $a = $('#txtAadharCardNumber')
+            if ($d.length != 0) {
+
+                if ($.trim($a.val()) == "") {
+                    alert("કૃપા કરીને આધાર કાર્ડ નંબર દાખલ કરો!");
+                    return;
+                }
+
+                if ($d.val().length != 0) {
+                    var model = {
+                        ApplicationNo: $("#txtENirmanCardNo").val(),
+                        UniqueIDNumber: $("#txtAadharCardNumber").val()
+                    };
+
+                    $.ajax({
+                        url: 'https://demo8.gipl.in/api/SchemeDetails/GetBOCWWorkerDetail',
+                        headers: {
+                            Authorization: "CXygSDL1Hf"
+                        },
+                        type: 'post',
+                        contentType: 'application/json',
+                        data:
+                            JSON.stringify(model),
+                        success: function(data) {
+                            if (data != null) {
+                                $("#divUserDetails").show();
+                                var gender = data.Result[0]["Gender"];
+                                var formattedDate = new Date(data.Result[0]["DateOfBirth"]);
+                                var day = ("0" + formattedDate.getDate()).slice(-2);
+                                var month = ("0" + (formattedDate.getMonth() + 1)).slice(-2);
+                                var year = formattedDate.getFullYear();
+                                var date = year + "-" + month + "-" + day
+                                $("#Name").val(data.Result[0]["Name"]);
+                                $("#DateOfBirth").val(date);
+                                $("#EmailId").val(data.Result[0]["EmailId"]);
+                                //document.getElementById("myRadio").value = "newRadioBtnValue"
+                                if (gender == "0") {
+                                    $("input[name=Gender][value=" + 0 + "]").prop('checked', true);
+                                } else {
+                                    $("input[name=Gender][value=" + 1 + "]").prop('checked', true);
+                                }
+
+                                $("#MobileNo").val(data.Result[0]["MobileNo"]);
+                                $("#RegistrationNo").val(data.Result[0]["UserName"]);
+                                $("#FirstCardIssuedDate").val(data.Result[0]["FirstCardIssuedDate"]);
+                                $("#CDistrictId").val(data.Result[0]["CDistrictId"]);
+                                $("#ICardFromDate").val(data.Result[0]["ICardFromDate"]);
+                                $("#ICardToDate").val(data.Result[0]["ICardToDate"]);
+                            }
+                            else {
+                                alert("તમારી વિગત અમાન્ય છે.");
+                            }
+                            //console.log(result);
+                            //var str = "<tr><td>" + result["id"] + "</td><td>" + result["name"] + "</td><td>" + result["startLocation"] + "</td><td>" + result[
+                            //    $("table tbody").append(str);
+                            //$("#resultDiv").show();
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr)
+                            alert("તમારી વિગત અમાન્ય છે.")
+                        }
+                    });
+
+                } else {
+                    alert("કૃપા કરીને ઇ-નિમાણ કાર્ડ નંબર દાખલ કરો");
+                    return;
+                }
+            } else {
+                alert("કૃપા કરીને ઇ-નિમાણ કાર્ડ નંબર દાખલ કરો");
+                return;
+
+            }
+        });
+
+        //Get Enirman Card Details From Enirman card Number
+        $("#btnLWB").click(function(e) {
+            var $d = $('#LWBAccountNo');
+            var $a = $('#txtAadharCardNumber')
+            if ($d.length != 0) {
+
+                if ($.trim($a.val()) == "") {
+                    alert("કૃપા કરીને આધાર કાર્ડ નંબર દાખલ કરો!");
+                    return;
+                }
+
+                if ($d.val().length != 0) {
+                    var model = {
+                        //ApplicationNo: $("#LWBAccountNo").val(),
+                        //UniqueIDNumber: $("#txtAadharCardNumber").val()
+                        "data": { "account": $("#LWBAccountNo").val() }
+                        //account:$("#LWBAccountNo").val()
+                    };
+
+                    $.ajax({
+                        url: 'https://glwbcrm.gujarat.gov.in/crm/api-v1/search',
+                        headers: {
+
+                            username: "glwbapp",
+                            password: "36d4f5a12f0b9bb05ba3e75348e4ec9a",
+                            token: "ABX78955-082E-42D4-8C88-FB420EF83113",
+                            Authorization1: "Bearer eyJ4NXQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZyIsImtpZCI6Ik16WXhNbUZrT0dZd01XSTBaV05tTkRjeE5HWXdZbU00WlRBM01XSTJOREF6WkdRek5HTTBaR1JsTmpKa09ERmtaRFJpT1RGa01XRmhNelUyWkdWbE5nX1JTMjU2IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJnc2RjYXBpZ3dzdSIsImF1dCI6IkFQUExJQ0FUSU9OIiwiYXVkIjoieDRSdUowckF3U01FUWVaaGRFYkV4REpVak9FYSIsIm5iZiI6MTYzMDU3OTMyMCwiYXpwIjoieDRSdUowckF3U01FUWVaaGRFYkV4REpVak9FYSIsInNjb3BlIjoiZGVmYXVsdCIsImlzcyI6Imh0dHBzOlwvXC9nc2RjYXBpZ2F0ZXdheWV4dC5ndWphcmF0Lmdvdi5pbjo5NDQzXC9vYXV0aDJcL3Rva2VuIiwiZXhwIjoxOTkwNTc5MzIwLCJpYXQiOjE2MzA1NzkzMjAsImp0aSI6IjNlZmU5NjUwLThhZjctNGMyYy1iMTFiLTY3N2Y1Yzk4ZGIxYSJ9.B4hWR0Yt-j7X1nutDj1LNIJfUflpmLYN_Kd5dh-sxJwJHqHUAIQglW_TGx0tnigNzUqwo9nx4z_2kVEewg9s6GNcvImARVtNRtlH2Lw22Bbr2lywLrL3_GsZPVktNu8_869JsyZhpfsuf7cUrYIm6ufxhrorzk57PrB76RrjtWrmIiKwJ7lxFP65wbjPLsYYqBzmjyN_TD6PKI40oC_bnfiqym2m0bfetFj1HLyXsdC_anC0zXyCw3jKIniFLZZgYQSM1ASbpRfkuPAMJEhn6eMOoAzhSKln4vzcRlTt7Ru_Uncfd8EZuVAKjiUdQRw8-2P9rK36sjDEGN8pYSR8hw"
+
+                        },
+                        type: 'post',
+                        crossDomain: true,
+                        contentType: 'application/json',
+                        data:
+                            JSON.stringify(model),
+                        success: function(data) {
+                            if (data != null) {
+                                var objData = JSON.parse(data);
+                                if (objData != null && objData.success == '1') {
+                                    $("#divGLWBUserDetails").show();
+                                    $("#divUserDetails").show();
+                                    var organization_name = objData.data.organization_name;
+                                    var email = objData.data.email;
+                                    var organization_address = objData.data.organization_address;
+                                    var city = objData.data.city;
+                                    var district = objData.data.district;
+                                    var taluka = objData.data.taluka;
+                                    var pincode = objData.data.pincode;
+                                    
+                                    $("#OrganizationName").val(organization_name);
+                                    $("#OrganizationEmail").val(email);
+                                    $("#OrganizationAddress").val(organization_address);
+                                    $("#OrganizationCity").val(city);
+                                    $("#OrganizationDistrict").val(district);
+                                    $("#OrganizationTaluka").val(taluka);
+                                    $("#OrganizationPinCode").val(pincode);
+                                }
+                                else {
+                                    alert("તમારી વિગત અમાન્ય છે.");
+                                }
+                            }
+                            else {
+                                alert("તમારી વિગત અમાન્ય છે.");
+                            }
+                            //console.log(result);
+                            //var str = "<tr><td>" + result["id"] + "</td><td>" + result["name"] + "</td><td>" + result["startLocation"] + "</td><td>" + result[
+                            //    $("table tbody").append(str);
+                            //$("#resultDiv").show();
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr)
+                            alert("તમારી વિગત અમાન્ય છે.")
+                        }
+                    });
+
+                } else {
+                    alert("કૃપા કરીને ઇ-નિમાણ કાર્ડ નંબર દાખલ કરો");
+                    return;
+                }
+            } else {
+                alert("કૃપા કરીને ઇ-નિમાણ કાર્ડ નંબર દાખલ કરો");
+                return;
+
+            }
+        });
+
+                                                                                                                                    //function validateEnirmanCardNo() {
+                                                                                                                                    //    let usernameValue = $("#").val();
+                                                                                                                                    //    if (usernameValue.length == "") {
+                                                                                                                                    //        $("#usercheck").show();
+                                                                                                                                    //        usernameError = false;
+                                                                                                                                    //        return false;
+                                                                                                                                    //    } else if (usernameValue.length < 3 || usernameValue.length > 10) {
+                                                                                                                                    //        $("#usercheck").show();
+                                                                                                                                    //        $("#usercheck").html("**length of username must be between 3 and 10");
+                                                                                                                                    //        usernameError = false;
+                                                                                                                                    //        return false;
+                                                                                                                                    //    } else {
+                                                                                                                                    //        $("#usercheck").hide();
+                                                                                                                                    //    }
+                                                                                                                                    //}
+
+
+
+    </script>
+    <script>
+        //For Labour Walfare Worker Board
+        //$("#btnLWB").click(function(e) {
+        //    "url": "https://glwbcrm.gujarat.gov.in/crm/api-v1/search",
+        //        "method": "POST",
+        //            "timeout": 0,
+        //                "headers": {
+        //        "username": "glwbapp",
+        //            "password": "36d4f5a12f0b9bb05ba3e75348e4ec9a",
+        //                "token": "ABX78955-082E-42D4-8C88-FB420EF83113",
+        //                    "Authorization1": "Bearer eyJ4NXQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZyIsImtpZCI6Ik16WXhNbUZrT0dZd01XSTBaV05tTkRjeE5HWXdZbU00WlRBM01XSTJOREF6WkdRek5HTTBaR1JsTmpKa09ERmtaRFJpT1RGa01XRmhNelUyWkdWbE5nX1JTMjU2IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJnc2RjYXBpZ3dzdSIsImF1dCI6IkFQUExJQ0FUSU9OIiwiYXVkIjoieDRSdUowckF3U01FUWVaaGRFYkV4REpVak9FYSIsIm5iZiI6MTYzMDU3OTMyMCwiYXpwIjoieDRSdUowckF3U01FUWVaaGRFYkV4REpVak9FYSIsInNjb3BlIjoiZGVmYXVsdCIsImlzcyI6Imh0dHBzOlwvXC9nc2RjYXBpZ2F0ZXdheWV4dC5ndWphcmF0Lmdvdi5pbjo5NDQzXC9vYXV0aDJcL3Rva2VuIiwiZXhwIjoxOTkwNTc5MzIwLCJpYXQiOjE2MzA1NzkzMjAsImp0aSI6IjNlZmU5NjUwLThhZjctNGMyYy1iMTFiLTY3N2Y1Yzk4ZGIxYSJ9.B4hWR0Yt-j7X1nutDj1LNIJfUflpmLYN_Kd5dh-sxJwJHqHUAIQglW_TGx0tnigNzUqwo9nx4z_2kVEewg9s6GNcvImARVtNRtlH2Lw22Bbr2lywLrL3_GsZPVktNu8_869JsyZhpfsuf7cUrYIm6ufxhrorzk57PrB76RrjtWrmIiKwJ7lxFP65wbjPLsYYqBzmjyN_TD6PKI40oC_bnfiqym2m0bfetFj1HLyXsdC_anC0zXyCw3jKIniFLZZgYQSM1ASbpRfkuPAMJEhn6eMOoAzhSKln4vzcRlTt7Ru_Uncfd8EZuVAKjiUdQRw8-2P9rK36sjDEGN8pYSR8hw",
+        //                        "Content-Type": "application/json"
+        //    },
+        //    "data": JSON.stringify({
+        //        "data": {
+        //            "account": "Ho/0015135"
+        //        }
+        //    }),
+        //        success: function(result) {
+        //            console.log(result);
+        //            //var str = "<tr><td>" + result["id"] + "</td><td>" + result["name"] + "</td><td>" + result["startLocation"] + "</td><td>" + result[
+        //            //    $("table tbody").append(str);
+        //            //$("#resultDiv").show();
+        //        },
+        //    error: function(xhr, status, error) {
+        //        console.log(xhr)
+        //    }
+        //};
+    </script>
+}
+
+    <!-- ======= Footer ======= -->

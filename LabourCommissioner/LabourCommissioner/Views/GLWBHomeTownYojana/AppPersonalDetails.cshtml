@@ -1,0 +1,565 @@
+﻿@{
+    ViewData["Title"] = "શ્રમયોગી પ્રવાસન યોજના";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero2">
+    <h2 class="animate__animated animate__fadeInDown"> શ્રમયોગી હોમ ટાઉન યોજના</h2>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services services2">
+        <div class="container-fluid">
+
+            <div class="section-title pt-5 pb-4 text-start">
+                @*<h2 class="mb-0">Tab Structure </h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>*@
+                @*<div class="col-md-2 align-self-center">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#schemeModal">અરજીની વિગત</a>
+                    </div>*@
+            </div>
+
+            <div class="row">
+                <div class="col position-relative">
+
+                    <ul class="nav nav-pills mb-3 justify-content-between" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active shadow" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                1<br />
+                                <span>Personal Detail</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link shadow" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                2<br />
+                                <span>Scheme Detail</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link shadow" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                                3<br />
+                                <span>Documents</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link shadow" id="pills-contact-tab2" data-bs-toggle="pill" data-bs-target="#pills-contact2" type="button" role="tab" aria-controls="pills-contact2" aria-selected="false">
+                                4<br />
+                                <span>Rules &amp; Regulation</span>
+                            </button>
+                        </li>
+
+                    </ul>
+                    <span style=" display: flex; border: solid 1px var(--bs-primary); margin-top: -50px; position: absolute; width: 94%; justify-content: center; margin-left: 2%; z-index: -1; opacity: .5; "></span>
+
+
+                    <div class="tab-content border p-3" id="pills-tabContent">
+
+                        <partial name="~/Views/Shared/_GLWBPersonalDetails.cshtml" />
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+
+                            <div>
+                                <fieldset>
+                                    <legend>શ્રમયોગી તથા તેના આશ્રિતોની વિગત </legend>
+                                    <table class="table bg-white table-bordered text-center">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblOEM_0" class="control-label">ક્રમ</span>
+                                                </td>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblModelName_1" class="control-label">નામ<span class="text-danger">*</span></span>
+                                                </td>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblModelName_2" class="control-label">ઉંમર<span class="text-danger">*</span></span>
+                                                </td>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblModelName_3" class="control-label">અરજદાર સાથે સંબઘ<span class="text-danger">*</span></span>
+                                                </td>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblModelName_4" class="control-label">નોકરી/ઘંઘો કરે છે કે કેમ?<span class="text-danger">*</span></span>
+                                                </td>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblModelName_5" class="control-label">અરજદારના આશ્રિત છે કે કેમ ?<span class="text-danger">*</span></span>
+                                                </td>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblModelName_6" class="control-label">આધારકાર્ડ નંબર<span class="text-danger">*</span></span>
+                                                </td>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblModelName_7" class="control-label">આશ્રિતોના પુરાવા સ્‍વરુપે રેશનીંગ કાર્ડ,જન્‍મનું પ્રમાણપત્ર,લગ્‍નનું પ્રમાણપત્ર, આધાર કાર્ડ, ચુંટણી કાર્ડ, (પુત્ર/પુત્રીના કિસ્‍સામાં) તથા સરકારશ્રી ઘ્‍વારા જારી કરવામાં આવેલ ઓળખપત્રોની સ્વપ્રમાણીત નકલ બીડવી. <span class="text-danger">*</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblOEM_0" class="control-label">1</span>
+                                                </td>
+                                                <td>
+                                                    <input name="txtFamilyMemberName" type="text" maxlength="100" value="Prakash Purohit"
+                                                           id="body_innerbody_txtFamilyMemberName" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <input name="txtAge" type="text" maxlength="100" id="body_innerbody_txtAge" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <div class="control-form">
+                                                        <select name="ctl00$ctl00$body$innerbody$ddlBeneficiaryType" id="body_innerbody_ddlRelation" class="form-control">
+                                                            <option value="0">-Please Select-</option>
+                                                            <option  value="1">પોતે</option>
+                                                            <option value="2">પત્ની</option>
+                                                            <option value="3">પુત્ર</option>
+                                                            <option value="4">પુત્રી</option>
+                                                            <option value="5">ભાઈ</option>
+                                                            <option value="6">બહેન</option>
+                                                            <option value="7">માતા</option>
+                                                            <option value="8">પિતા</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-form col-md-3">
+                                                        <table id="body_innerbody_rblIsEmployeed" class="aspNetDisabled radio">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsEmployeed_0" type="radio" name="ctl00$ctl00$body$innerbody$rblIsEmployeed" value="0" checked="checked"><label for="body_innerbody_rblIsEmployeed_0">હા</label></span></td>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsEmployeed_1" type="radio" name="ctl00$ctl00$body$innerbody$rblIsEmployeed" value="1"><label for="body_innerbody_rblIsEmployeed_1">ના</label></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        @*<span id="body_innerbody_reqApplicantGender" style="color:Red;display:none;">લિંગ પસંદ કરો.</span>*@
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-form col-md-3">
+                                                        <table id="body_innerbody_rblIsDependent" class="aspNetDisabled radio">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsDependent_0" type="radio" name="ctl00$ctl00$body$innerbody$rblIsDependent" value="0" checked="checked"><label for="body_innerbody_rblIsDependent_0">હા</label></span></td>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsDependent_1" type="radio" name="ctl00$ctl00$body$innerbody$rblIsDependent" value="1"><label for="body_innerbody_rblIsDependent_1">ના</label></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        @*<span id="body_innerbody_reqApplicantGender" style="color:Red;display:none;">લિંગ પસંદ કરો.</span>*@
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input name="txtAadharNo" type="text" maxlength="100" id="body_innerbody_txtAadharNo" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <input type="file" class="form-control-file border p-1" id="txtDocument">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblOEM_0" class="control-label">2</span>
+                                                </td>
+                                                <td>
+                                                    <input name="txtFamilyMemberName" type="text" maxlength="100" value="Hitiksha Patel"
+                                                           id="body_innerbody_txtFamilyMemberName" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <input name="txtAge" type="text" maxlength="100" id="body_innerbody_txtAge" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <div class="control-form">
+                                                        <select name="ctl00$ctl00$body$innerbody$ddlBeneficiaryType" id="body_innerbody_ddlRelation" class="form-control">
+                                                            <option value="0">-Please Select-</option>
+                                                            <option  value="1">પોતે</option>
+                                                            <option value="2">પત્ની</option>
+                                                            <option value="3">પુત્ર</option>
+                                                            <option value="4">પુત્રી</option>
+                                                            <option value="5">ભાઈ</option>
+                                                            <option value="6">બહેન</option>
+                                                            <option value="7">માતા</option>
+                                                            <option value="8">પિતા</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-form col-md-3">
+                                                        <table id="body_innerbody_rblIsEmployeed" class="aspNetDisabled radio">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsEmployeed_3" type="radio" name="ctl00$ctl00$body$innerbody$rblIsEmployeed2" value="0" checked="checked"><label for="body_innerbody_rblIsEmployeed_0">હા</label></span></td>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsEmployeed_4" type="radio" name="ctl00$ctl00$body$innerbody$rblIsEmployeed2" value="1"><label for="body_innerbody_rblIsEmployeed_1">ના</label></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        @*<span id="body_innerbody_reqApplicantGender" style="color:Red;display:none;">લિંગ પસંદ કરો.</span>*@
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-form col-md-3">
+                                                        <table id="body_innerbody_rblIsDependent" class="aspNetDisabled radio">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsDependent_3" type="radio" name="ctl00$ctl00$body$innerbody$rblIsDependent2" value="0" checked="checked"><label for="body_innerbody_rblIsDependent_0">હા</label></span></td>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsDependent_4" type="radio" name="ctl00$ctl00$body$innerbody$rblIsDependent2" value="1"><label for="body_innerbody_rblIsDependent_1">ના</label></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        @*<span id="body_innerbody_reqApplicantGender" style="color:Red;display:none;">લિંગ પસંદ કરો.</span>*@
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input name="txtAadharNo" type="text" maxlength="100" id="body_innerbody_txtAadharNo" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <input type="file" class="form-control-file border p-1" id="txtDocument">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblOEM_0" class="control-label">3</span>
+                                                </td>
+                                                <td>
+                                                    <input name="txtFamilyMemberName" type="text" maxlength="100" value="Harsh Parmar"
+                                                           id="body_innerbody_txtFamilyMemberName" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <input name="txtAge" type="text" maxlength="100" id="body_innerbody_txtAge" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <div class="control-form">
+                                                        <select name="ctl00$ctl00$body$innerbody$ddlBeneficiaryType" id="body_innerbody_ddlRelation" class="form-control">
+                                                            <option value="0">-Please Select-</option>
+                                                            <option  value="1">પોતે</option>
+                                                            <option value="2">પત્ની</option>
+                                                            <option value="3">પુત્ર</option>
+                                                            <option value="4">પુત્રી</option>
+                                                            <option value="5">ભાઈ</option>
+                                                            <option value="6">બહેન</option>
+                                                            <option value="7">માતા</option>
+                                                            <option value="8">પિતા</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-form col-md-3">
+                                                        <table id="body_innerbody_rblIsEmployeed" class="aspNetDisabled radio">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsEmployeed_5" type="radio" name="ctl00$ctl00$body$innerbody$rblIsEmployeed3" value="0" checked="checked"><label for="body_innerbody_rblIsEmployeed_0">હા</label></span></td>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsEmployeed_6" type="radio" name="ctl00$ctl00$body$innerbody$rblIsEmployeed3" value="1"><label for="body_innerbody_rblIsEmployeed_1">ના</label></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        @*<span id="body_innerbody_reqApplicantGender" style="color:Red;display:none;">લિંગ પસંદ કરો.</span>*@
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-form col-md-3">
+                                                        <table id="body_innerbody_rblIsDependent" class="aspNetDisabled radio">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsDependent_5" type="radio" name="ctl00$ctl00$body$innerbody$rblIsDependent3" value="0" checked="checked"><label for="body_innerbody_rblIsDependent_0">હા</label></span></td>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsDependent_6" type="radio" name="ctl00$ctl00$body$innerbody$rblIsDependent3" value="1"><label for="body_innerbody_rblIsDependent_1">ના</label></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        @*<span id="body_innerbody_reqApplicantGender" style="color:Red;display:none;">લિંગ પસંદ કરો.</span>*@
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input name="txtAadharNo" type="text" maxlength="100" id="body_innerbody_txtAadharNo" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <input type="file" class="form-control-file border p-1" id="txtDocument">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span id="body_innerbody_rptVehicleDetails_lblOEM_0" class="control-label">4</span>
+                                                </td>
+                                                <td>
+                                                    <input name="txtFamilyMemberName" type="text" maxlength="100" value="Chitrank Kahar"
+                                                           id="body_innerbody_txtFamilyMemberName" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <input name="txtAge" type="text" maxlength="100" id="body_innerbody_txtAge" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <div class="control-form">
+                                                        <select name="ctl00$ctl00$body$innerbody$ddlBeneficiaryType" id="body_innerbody_ddlRelation" class="form-control">
+                                                            <option value="0">-Please Select-</option>
+                                                            <option  value="1">પોતે</option>
+                                                            <option value="2">પત્ની</option>
+                                                            <option value="3">પુત્ર</option>
+                                                            <option value="4">પુત્રી</option>
+                                                            <option value="5">ભાઈ</option>
+                                                            <option value="6">બહેન</option>
+                                                            <option value="7">માતા</option>
+                                                            <option value="8">પિતા</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-form col-md-3">
+                                                        <table id="body_innerbody_rblIsEmployeed" class="aspNetDisabled radio">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsEmployeed_7" type="radio" name="ctl00$ctl00$body$innerbody$rblIsEmployeed4" value="0" checked="checked"><label for="body_innerbody_rblIsEmployeed_0">હા</label></span></td>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsEmployeed_8" type="radio" name="ctl00$ctl00$body$innerbody$rblIsEmployeed4" value="1"><label for="body_innerbody_rblIsEmployeed_1">ના</label></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        @*<span id="body_innerbody_reqApplicantGender" style="color:Red;display:none;">લિંગ પસંદ કરો.</span>*@
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control-form col-md-3">
+                                                        <table id="body_innerbody_rblIsDependent" class="aspNetDisabled radio">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsDependent_7" type="radio" name="ctl00$ctl00$body$innerbody$rblIsDependent4" value="0" checked="checked"><label for="body_innerbody_rblIsDependent_0">હા</label></span></td>
+                                                                    <td><span class="aspNetDisabled"><input id="body_innerbody_rblIsDependent_8" type="radio" name="ctl00$ctl00$body$innerbody$rblIsDependent4" value="1"><label for="body_innerbody_rblIsDependent_1">ના</label></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        @*<span id="body_innerbody_reqApplicantGender" style="color:Red;display:none;">લિંગ પસંદ કરો.</span>*@
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input name="txtAadharNo" type="text" maxlength="100" id="body_innerbody_txtAadharNo" class="form-control" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <input type="file" class="form-control-file border p-1" id="txtDocument">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+
+
+                                <fieldset class="custom-fieldset mb-4">
+                                    <legend> મુસાફરીની વિગતો</legend>
+                                    <div class="">
+                                        <div class="form-horizontal form-bordered">
+                                            <div class="form-group row">
+                                                <span id="body_innerbody_label1" class="control-label col-md-3">મુસાફરી શરુ કરવાનું સ્‍થળ :<span class="text-danger">*</span> :</span>
+                                                <div class="control-form col-md-3">
+                                                    <input name="txtTourStartPlace" type="text" maxlength="100" id="body_innerbody_txtTourStartPlace" class="form-control" autocomplete="off">
+                                                    @*<span id="body_innerbody_txtStudentName" style="color:Red;display:none;">વ્યવસાય નો પ્રકાર લખો.</span>*@
+                                                </div>
+                                                <!--<span id="body_innerbody_label1" class="control-label col-md-3">વતનનું સ્‍થળ ,શહેર:<span class="text-danger">*</span> :</span>
+                                                <div class="control-form col-md-3">
+                                                    <input name="txtTourPlace" type="text" maxlength="100" id="body_innerbody_txtTourPlace" class="form-control" autocomplete="off">-->
+                                                    @*<span id="body_innerbody_txtStudentName" style="color:Red;display:none;">વ્યવસાય નો પ્રકાર લખો.</span>*@
+                                                <!--</div>-->
+                                            </div>
+                                            @*<div class="form-group row">
+                                                <span class="control-label col-md-3">
+                                                    રાજયનું નામ :  <span class="text-danger">*</span>
+                                                </span>
+                                                <div class="control-form col-md-3">
+                                                    <select name="ctl00$ctl00$body$innerbody$ucApplicantAddress$ddlState" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$body$innerbody$ucApplicantAddress$ddlState\',\'\')', 0)" id="body_innerbody_ucApplicantAddress_ddlState" disabled="disabled" tabindex="1" class="aspNetDisabled form-control">
+                                                        <option value="0">-Please Select-</option>
+                                                        <option value="1">Andhra Pradesh - આંધ્રપ્રદેશ</option>
+                                                        <option value="2">Arunachal Pradesh - </option>
+                                                        <option value="3">Assam - </option>
+                                                        <option value="4">Bihar - </option>
+                                                        <option value="5">Chhattisgarh - </option>
+                                                        <option value="6">Goa - </option>
+                                                        <option selected="selected" value="7">Gujarat - ગુજરાત</option>
+                                                        <option value="8">Haryana - </option>
+                                                        <option value="9">Himachal Pradesh - </option>
+                                                        <option value="10">Jammu and Kashmir - </option>
+                                                        <option value="11">Jharkhand - </option>
+                                                        <option value="12">Karnataka - </option>
+                                                        <option value="13">Kerala - </option>
+                                                        <option value="14">Madhya Pradesh - </option>
+                                                        <option value="15">Maharashtra - </option>
+                                                        <option value="16">Manipur - </option>
+                                                        <option value="17">Meghalaya - </option>
+                                                        <option value="18">Mizoram - </option>
+                                                        <option value="19">Nagaland - </option>
+                                                        <option value="20">Odisha - </option>
+                                                        <option value="21">Punjab - </option>
+                                                        <option value="22">Rajasthan - </option>
+                                                        <option value="23">Sikkim - </option>
+                                                        <option value="24">Tamil Nadu - </option>
+                                                        <option value="25">Telangana - </option>
+                                                        <option value="26">Tripura - </option>
+                                                        <option value="27">Uttar Pradesh - </option>
+                                                        <option value="28">Uttarakhand - </option>
+                                                        <option value="29">West Bengal - </option>
+                                                        <option value="30">Andaman and Nicobar Islands(UT) - </option>
+                                                        <option value="31">Chandigarh(UT) - </option>
+                                                        <option value="32">Dadra and Nagar Haveli(UT) - </option>
+                                                        <option value="33">Daman and Diu(UT) - </option>
+                                                        <option value="34">Delhi(UT) - </option>
+                                                        <option value="37">Lakshadweep(UT) - </option>
+                                                        <option value="38">Puducherry(UT) - </option>
+
+                                                    </select>
+                                                    <span id="body_innerbody_ucApplicantAddress_ReqddlState" class="text-danger" style="display:none;">રાજયનું નામ પસંદ કરો.</span>
+                                                </div>
+                                                <span class="control-label col-md-3">
+                                                    જિલ્લાનું નામ :  <span class="text-danger">*</span>
+                                                </span>
+                                                <div class="control-form col-md-3">
+                                                    <select name="ctl00$ctl00$body$innerbody$ucApplicantAddress$ddlDistrict" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$body$innerbody$ucApplicantAddress$ddlDistrict\',\'\')', 0)" id="body_innerbody_ucApplicantAddress_ddlDistrict" tabindex="2" class="form-control">
+                                                        <option value="0">-Please Select-</option>
+                                                        <option value="9">Ahmadabad - અમદાવાદ</option>
+                                                        <option value="1">Amreli - અમરેલી</option>
+                                                        <option value="10">Anand - આણંદ</option>
+                                                        <option value="27">Arvalli - અરવલ્લી</option>
+                                                        <option value="11">Banaskantha - બનાસકાંઠા</option>
+                                                        <option value="12">Bharuch - ભરુચ</option>
+                                                        <option value="2">Bhavnagar - ભાવનગર</option>
+                                                        <option value="28">Botad - બોટાદ</option>
+                                                        <option value="29">Chhotaudepur - છોટાઉદેપુર</option>
+                                                        <option value="13">Dahod - દાહોદ</option>
+                                                        <option value="14">Dangs - ડાંગ</option>
+                                                        <option value="30">Devbhumi Dwarka - દેવભુમિ દ્વારકા</option>
+                                                        <option value="15">Gandhinagar - ગાંધીનગર</option>
+                                                        <option value="31">Gir Somnath - ગીર સોમનાથ</option>
+                                                        <option value="3">Jamnagar - જામનગર</option>
+                                                        <option value="4">Junagadh - જુનાગઢ</option>
+                                                        <option value="16">Kachchh - કચ્છ</option>
+                                                        <option value="18">Kheda - ખેડા</option>
+                                                        <option value="17">Mahesana - મહેસાણા</option>
+                                                        <option value="32">Mahisagar - મહિસાગર</option>
+                                                        <option value="33">Morbi - મોરબી</option>
+                                                        <option value="19">Narmada - નર્મદા</option>
+                                                        <option value="20">Navsari - નવસારી</option>
+                                                        <option value="21">Panchmahals - પંચમહાલ</option>
+                                                        <option value="22">Patan - પાટણ</option>
+                                                        <option value="5">Porbandar - પોરબંદર</option>
+                                                        <option value="6">Rajkot - રાજકોટ</option>
+                                                        <option value="23">Sabarkantha - સાબરકાંઠા</option>
+                                                        <option value="24">Surat - સુરત</option>
+                                                        <option value="7">Surendranagar - સુરેન્દ્રનગર</option>
+                                                        <option value="25">Tapi - તાપી</option>
+                                                        <option value="8">Vadodara - વડોદરા</option>
+                                                        <option value="26">Valsad - વલસાડ</option>
+
+                                                    </select>
+                                                    <span id="body_innerbody_ucApplicantAddress_ReqddlDistrict" class="text-danger" style="display:none;">જિલ્લાનું નામ પસંદ કરો.</span>
+
+                                                </div>
+                                            </div>*@
+
+                                                <div class="form-group row">
+                                                    <span id="" class="control-label col-md-3">વતન પ્રવાસ શરુ કરવાની સંભવિત તારીખ <span class="text-danger">*</span> :</span>
+                                                    <div class="control-form col-md-3">
+                                                        <input name="txtTourStartDate" type="text" maxlength="100" id="body_innerbody_txtTourStartDate" class="form-control datepicker1" placeholder="mm/dd/yyyy" autocomplete="off">
+                                                        <span id="body_innerbody_txtDOB" style="color:Red;display:none;">પ્રવાસ શરુ કરવાની સંભવિત તારીખ લખો.</span>
+                                                    </div>
+                                                    <span id="" class="control-label col-md-3">વતન પ્રવાસથી પરત આવવાની સંભવિત તારીખ  <span class="text-danger">*</span> :</span>
+                                                    <div class="control-form col-md-3">
+                                                        <input name="txtTourEndDate" type="text" maxlength="100" id="body_innerbody_txtTourEndDate" class="form-control datepicker1" placeholder="mm/dd/yyyy" autocomplete="off">
+                                                        <span id="body_innerbody_txtDOB" style="color:Red;display:none;">પ્રવાસથી પરત આવવાની સંભવિત તારીખ લખો.</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+
+                            <span class="text-danger font-weight-bolder">
+                                <small>
+                                    <b id="">Note : બધા અપલોડ કરેલા દસ્તાવેજોની સ્વયં પ્રમાણિત હોવી જોઈએ</b> <br>
+                                    <b id="">Note : Uploaded documents are less than 1 MB.</b> <br>
+                                </small>
+                            </span>
+                            <table class="table table-striped table-bordered table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td scope="col">
+                                            શ્રમયોગીને કંપની દ્વારા આપવામાં આવેલ ઓળખપત્રની નકલ  <span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="col">
+                                            મુસાફરી કરનાર તમામ લાભાર્થીઓના આધાર કાર્ડની નકલ <span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+                                    @*
+                                    <tr>
+                                        <td scope="col">
+                                            શ્રમયોગીના વતનનો પુરાવો (આધાર કાર્ડ/ચુંટણી કાર્ડ/ડ્રાયવિંગ લાયસન્સ/રેશન કાર્ડ/પાસપોર્ટ/શાળા છોડ્યાનું પ્રમાણપત્ર/જન્મનો દાખલો (કોઈપણ એક) <span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>*@
+                                    <tr>
+                                        <td scope="col">
+                                            શ્રમયોગીનાં બેંક પાસબુકની પ્રથમ પાનાની નકલ.<span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">
+                                            કંપની દ્વારા અત્રેની કચેરી ભરપાઈ કરવામાં આવેલ છેલ્લા બે વર્ષની લેબર વેલ્ફેર ફંડ રસીદની નકલ :<span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="col">
+                                            બાંહેઘરી  :<span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">
+                                            પ્રમાણપત્ર    :<span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">
+                                            પ્રમાણિક પ્રમાણપત્ર (Bonafide Certificate) :<span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <partial name="~/Views/Shared/_TermsCondition.cshtml" />
+
+                        <div class="card-footer text-center border">
+                            <button class="btn btn-sm btn-primary pl-3 pr-3">Save</button>
+                            <button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">Cancel</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End Services Section -->
+
+</main>
+<!-- End #main -->
+<!-- ======= Footer ======= -->

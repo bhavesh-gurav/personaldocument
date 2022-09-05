@@ -1,0 +1,42 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@using LabourCommissioner.Common.Utility
+@using System.Web
+@model ServiceMaster
+@{
+    var serviceid = HttpUtility.UrlEncode(CommonUtils.Encrypt(Model.ServiceId.ToString()));
+}
+@if (Model != null)
+{
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary py-2">
+                <h5 class="modal-title d-flex align-items-center w-100 justify-content-between flex-row-reverse" id="dynamicSchemeModelLabel">
+                    <img src="/assets/img/BOCWLogo.png" class="rounded-circle me-2" height="50" width="50">@Model.ServiceNameGujarati
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style=" filter: invert(1); "></button>
+            </div>
+            <div class="modal-body bocw_bg">
+                @if (Model.ServiceId == 7 || Model.ServiceId == 19)
+                {
+                    @Html.Raw(Model.Description)
+                }
+                else
+                {
+                    <h1> @Html.Raw("Comming Soon...") </h1>
+                }
+            </div>
+
+            <div class="modal-footer bg-warning">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                @if (Model.ServiceId == 7 || Model.ServiceId == 19)
+                {
+                    @*<a class="btn btn-primary" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-id="@Model.ServiceId"> Accept</a>*@
+
+                    <a class="btn btn-primary" asp-controller="Home" asp-action="ApplicationDetails" asp-route-strserviceId="@serviceid">Accept</a>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@*modal end*@

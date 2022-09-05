@@ -1,0 +1,131 @@
+﻿@model IEnumerable<LabourCommissioner.Abstraction.DataModels.TabModel>
+
+@{
+    ViewData["Title"] = "શિક્ષણ સહાય/ પી.એચ.ડી યોજના";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["BankDetails"] = "અરજદાર શ્રમિકના";
+    ViewData["IsBankVisible"] = true;
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero2">
+    <h2 class="animate__animated animate__fadeInDown">શિક્ષણ સહાય/ પી.એચ.ડી યોજના</h2>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services services2">
+        <div class="container-fluid">
+
+            <div class="section-title pt-5 pb-4 text-start">
+                @*<h2 class="mb-0">Tab Structure </h2>
+                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>*@
+                <div class="col-md-2 align-self-center">
+                    @*<a href="#" data-bs-toggle="modal" data-bs-target="#schemeModal">અરજીની વિગત</a>*@
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <partial name="~/Views/Shared/BOCWSikshanSahayYojana/_BOCWSikshanSahayYojanaTab.cshtml" view-data="ViewData" />
+            </div>
+            <div class="tab-content border p-3" id="pills-tabContent">
+
+
+                <div id="dvTabPartialView"></div>
+
+
+                @*<div class="card-footer text-center border">
+                <button class="btn btn-sm btn-primary pl-3 pr-3">Save</button>
+                <button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">Cancel</button>
+                </div>*@
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+
+</main><!-- End #main -->
+<script src="~/assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/Common.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var ControllerName = $("#hdnControllerName").val();
+        var ActionName = $("#hdnActionName").val();
+        var ServiceId = $("#hdnServiceId").val();
+        var ApplicationId = $("#hdnApplicationId").val();
+        LoadSchemePartialView(ControllerName, ActionName, ServiceId, ApplicationId)
+    });
+</script>
+
+@*<script type="text/javascript">
+    $(document).ready(function() {
+        $("#listState").change(function() {
+
+            $.ajax({
+                type: "get",
+                url: "/BOCWSikshanSahayYojana/GetDistrict",
+                //data: { DepartmentId: $('#DepartmentId').val() },
+                datatype: "json",
+                traditional: true,
+                success: function(data) {
+                    var DistrictList = "";
+                    DistrictList = DistrictList + '<option value="">--Select--</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        DistrictList = DistrictList + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                    }
+                    $('#listDistrict').html(DistrictList);
+                }
+            });
+        });
+    });
+</script>*@
+
+
+
+@*<script type="text/javascript">
+
+    function GetDeegreeBySubjectId(subjectId) {
+       var subjectID=subjectId
+        $.ajax({
+            type: "get",
+            url: "/BOCWSikshanSahayYojana/GetSubject",
+            data: {subjectId:subjectId}
+            datatype: "json",
+            traditional: true,
+            success: function(data) {
+                var DegreeList = "";
+                DegreeList = DegreeList + '<option value="">--Select--</option>';
+                for (var i = 0; i < data.data.result.length; i++) {
+                    DegreeList = DegreeList + '<option value=' + data.data.result[i].value + '>' + data.data.result[i].text + '</option>';
+                }
+                $('#GSubject').html(DegreeList);
+
+            }
+        });
+    }
+
+</script>*@
+
+
+
+@section Scripts{
+
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/vendor/aos/aos.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+}

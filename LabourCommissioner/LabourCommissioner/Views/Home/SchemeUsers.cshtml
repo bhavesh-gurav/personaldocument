@@ -1,0 +1,147 @@
+﻿@model IEnumerable<LabourCommissioner.Abstraction.DataModels.SchemeUserModel>
+@{
+
+    ViewData["Title"] = "SchemeUsers";
+    int srno = 1;
+}
+<main id="main" class="pt-5">
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services services2">
+        <div class="container">
+
+            <div class="section-title pt-5 pb-4 text-start">
+                <h2 class="mb-0">Unorganized Workers</h2>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-2 bg-primary d-flex justify-content-between">
+                            <span class="text-white"><i class='bx bx-list-ul align-middle'></i> Details <small> (Individual Record)</small> </span>
+                           
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-bordered table-striped DataTable table-sm">
+                                    <thead>
+                                        <tr>
+                                            @*<th>uwin</th>*@
+                                            <th>Sr No.</th>
+                                            <th>Name in English</th>
+                                            <th>Name in Gujrati</th>
+                                            <th>Gender</th>
+                                           @* <th>Mobile</th>*@
+                                            <th>Date of birth</th>
+                                            <th>Birth place</th>
+                                            <th>State</th>
+                                            <th>District</th>
+                                            <th>Taluka</th>
+                                            <th>Occupation</th>
+                                            @*<th>occupation</th>
+                                            <th>qualification_name</th>
+                                            <th>skills</th>
+                                            <th>marital_status</th>
+                                            <th>income</th>
+                                            <th>residential_address</th>
+                                            <th>district_code</th>
+                                            <th>subdistrict</th>
+                                            <th>location</th>
+                                            <th>pincode</th>
+                                            <th>domicile</th>
+                                            <th>dependent_members</th>
+                                            <th>issue_date</th>
+                                            <th>expiry_date</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="text-center">
+                                                    @(srno++)
+                                                </td>
+                                                <td>
+                                                    @item.subscriber_name
+                                                </td>
+                                                <td>
+                                                    @item.local_name
+                                                </td>
+                                                <td  class="text-center">
+                                                    @item.gender
+                                                </td>
+                                               @* <td  class="text-center">
+                                                    @item.mobile
+                                                </td>*@
+                                                <td  class="text-center">
+                                                    @item.dob.ToString("dd/MM/yyyy")
+                                                </td>
+                                                <td>
+                                                    @item.birth_place
+                                                </td>   
+                                                <td>
+                                                    @item.domicile_state
+                                                </td>
+                                                <td>
+                                                    @item.district
+                                                </td>
+                                                <td>
+                                                    @item.subdistrict_name
+                                                </td>
+                                                <td>
+                                                    @item.occupation_name
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                           @*<th>uwin</th>*@
+                                            <th>Sr No.</th>
+                                            <th>Subscriber Name</th>
+                                            <th>Local name</th>
+                                            <th>Gender</th>
+                                           @* <th>Mobile</th>*@
+                                            <th>Date of birth</th>
+                                            <th>Birth place</th>
+                                            <th>State</th>
+                                            <th>District</th>
+                                            <th>Sub District</th>
+                                            <th>occupation_name</th>
+                                            @*<th>occupation</th>
+                                            <th>qualification_name</th>
+                                            <th>skills</th>
+                                            <th>marital_status</th>
+                                            <th>income</th>
+                                            <th>residential_address</th>
+                                            <th>district_code</th>
+                                            <th>subdistrict</th>
+                                            <th>location</th>
+                                            <th>pincode</th>
+                                            <th>domicile</th>
+                                            <th>dependent_members</th>
+                                            <th>issue_date</th>
+                                            <th>expiry_date</th>*@
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+@section Scripts{
+    <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Template Main JS File -->
+    @*<script src="assets/js/schemeuser.js"></script>*@
+    }

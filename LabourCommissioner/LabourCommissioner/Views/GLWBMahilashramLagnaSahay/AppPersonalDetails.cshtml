@@ -1,0 +1,911 @@
+﻿@{
+    ViewData["Title"] = "મહિલા શ્રમયોગી લગ્ન સહાય યોજના";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero2">
+    <h2 class="animate__animated animate__fadeInDown">મહિલા શ્રમયોગી લગ્ન સહાય યોજના</h2>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services services2">
+        <div class="container-fluid">
+
+            <div class="section-title pt-5 pb-4 text-start">
+                <h3>
+                </h3>
+            </div>
+
+            <div class="row">
+                <div class="col position-relative">
+
+                    <ul class="nav nav-pills mb-3 justify-content-between" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active shadow" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                1<br />
+                                <span>Personal Detail</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link shadow" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                2<br />
+                                <span>Scheme Detail</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link shadow" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                                3<br />
+                                <span>Documents</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link shadow" id="pills-contact-tab2" data-bs-toggle="pill" data-bs-target="#pills-contact2" type="button" role="tab" aria-controls="pills-contact2" aria-selected="false">
+                                4<br />
+                                <span>Rules &amp; Regulation</span>
+                            </button>
+                        </li>
+
+                    </ul>
+                    <span style=" display: flex; border: solid 1px var(--bs-primary); margin-top: -50px; position: absolute; width: 94%; justify-content: center; margin-left: 2%; z-index: -1; opacity: .5; "></span>
+
+
+                    <div class="tab-content border p-3" id="pills-tabContent">
+
+                        <partial name="~/Views/Shared/_GLWBPersonalDetails.cshtml" />
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+
+                            <div>
+                                <fieldset class="custom-fieldset mb-4">
+                                    <legend>મહિલા શ્રમયોગી લગ્ન સહાય યોજના</legend>
+                                    <div class="">
+                                        <div class="form-horizontal form-bordered">
+
+                                            <div id="body_innerbody_dv3" class="form-group row">
+                                                <span id="body_innerbody_label7" class="control-label col-md-3">લગ્ન થયા તારીખ:</span>
+                                                <div class="control-form col-md-3">
+                                                    <input type="text" class="form-control datepicker1" placeholder="mm/dd/yyyy" />
+                                                </div>
+                                                <span id="body_innerbody_label8" class="control-label col-md-3">લગ્ન નોંધણી નંબર   :</span>
+                                                <div class="control-form col-md-3">
+                                                    <input name="ctl00$ctl00$body$innerbody$txtDateofJoining" type="text" maxlength="100" id="body_innerbody_txtDateofJoining" class="form-control datepicker">
+                                                    <span id="body_innerbody_ReqtxtDateofJoining" style="color:Red;display:none;">લગ્ન નોંધણી નંબર   લખો.</span>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+                                            <div id="body_innerbody_dv3" class="form-group row">
+                                               
+                                                <span id="body_innerbody_label7" class="control-label col-md-3">માસિક કુલ પગાર: </span>
+                                                <div class="control-form col-md-3">
+                                                    <input name="ctl00$ctl00$body$innerbody$txtMonthlySalary" type="text" maxlength="100" id="body_innerbody_txtMonthlySalary" class="form-control">
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- <fieldset class="custom-fieldset mb-4">
+                <legend>સંસ્થાની વિગત</legend>
+                <div class="">
+                    <div class="form-horizontal form-bordered">
+                        <div id="body_innerbody_Div1" class="form-group row">
+                            <span id="body_innerbody_label9" class="control-label col-md-3">લેબોર વેલ્ફેર ફંડ એકાઉન્ટ નંબર :</span>
+                            <div class="control-form col-md-7">
+                                <input name="ctl00$ctl00$body$innerbody$txtOrgACNO" type="text" maxlength="100" id="body_innerbody_txtOrgACNO" class="form-control">
+                                <span id="body_innerbody_ReqtxtOrgACNO" style="color:Red;display:none;">સંસ્થાનો એકાઉન્ટ નંબર લખો.</span>
+                            </div>
+                            <div class="control-form col-md-2">
+                                <input type="submit" name="ctl00$ctl00$body$innerbody$btnVerify" value="Verify" id="body_innerbody_btnVerify" class="btn btn-success btn-sm px-3 rounded-pill">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </fieldset>
+
+            <!--    <fieldset class="custom-fieldset mb-4">
+                <legend>ઇલેક્ટ્રીક ટૂ વિલર ની વિગતો</legend>
+                <div class="form-horizontal form-bordered">
+
+                    <div class="form-group row">
+                        <span id="" class="control-label col-md-2">કંપનીનું નામ :</span>
+                        <div class="control-form col-md-2">
+                            <select class="form-control">
+                                <option selected="selected" value="0">-Please Select-</option>
+                                <option value="5">Ampere Vehicles Pvt Ltd</option>
+                                <option value="2">Hero Electric Vehicles Pvt Ltd</option>
+                                <option value="4">JITENDRA NEW EV TECH PVT LTD</option>
+                                <option value="3">Okinawa Autotech Private Limited</option>
+
+                            </select>
+
+                        </div>
+                        <span id="" class="control-label col-md-2">ડીલર જિલ્લો:</span>
+                        <div class="control-form col-md-2">
+                            <select class="form-control">
+                                <option selected="selected" value="0">-Please Select-</option>
+                                <option value="9">Ahmadabad - અમદાવાદ</option>
+                                <option value="1">Amreli - અમરેલી</option>
+                                <option value="10">Anand - આણંદ</option>
+                                <option value="27">Arvalli - અરવલ્લી</option>
+                                <option value="11">Banaskantha - બનાસકાંઠા</option>
+                                <option value="12">Bharuch - ભરુચ</option>
+                                <option value="2">Bhavnagar - ભાવનગર</option>
+                                <option value="28">Botad - બોટાદ</option>
+                                <option value="29">Chhotaudepur - છોટાઉદેપુર</option>
+                                <option value="13">Dahod - દાહોદ</option>
+                                <option value="14">Dangs - ડાંગ</option>
+                                <option value="30">Devbhumi Dwarka - દેવભુમિ દ્વારકા</option>
+                                <option value="15">Gandhinagar - ગાંધીનગર</option>
+                                <option value="31">Gir Somnath - ગીર સોમનાથ</option>
+                                <option value="3">Jamnagar - જામનગર</option>
+                                <option value="4">Junagadh - જુનાગઢ</option>
+                                <option value="16">Kachchh - કચ્છ</option>
+                                <option value="18">Kheda - ખેડા</option>
+                                <option value="17">Mahesana - મહેસાણા</option>
+                                <option value="32">Mahisagar - મહિસાગર</option>
+                                <option value="33">Morbi - મોરબી</option>
+                                <option value="19">Narmada - નર્મદા</option>
+                                <option value="20">Navsari - નવસારી</option>
+                                <option value="21">Panchmahals - પંચમહાલ</option>
+                                <option value="22">Patan - પાટણ</option>
+                                <option value="5">Porbandar - પોરબંદર</option>
+                                <option value="6">Rajkot - રાજકોટ</option>
+                                <option value="23">Sabarkantha - સાબરકાંઠા</option>
+                                <option value="24">Surat - સુરત</option>
+                                <option value="7">Surendranagar - સુરેન્દ્રનગર</option>
+                                <option value="25">Tapi - તાપી</option>
+                                <option value="8">Vadodara - વડોદરા</option>
+                                <option value="26">Valsad - વલસાડ</option>
+
+                            </select>
+
+
+                        </div>
+                        <span id="body_innerbody_label19" class="control-label col-md-2">ડીલરનું નામ  :</span>
+                        <div class="control-form col-md-2">
+                            <select class="form-control">
+                                <option value="0">-Please Select-</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table bg-white table-bordered text-center">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input id="body_innerbody_rptVehicleDetails_chkModel_0" type="checkbox" name="ctl00$ctl00$body$innerbody$rptVehicleDetails$ctl01$chkModel">
+                            </td>
+
+                            <td><img src="/assets/img/logo2.png" alt="" height="50" class="border rounded-pill"></td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblOEM_0" class="control-label">Okinawa Autotech Private Limited</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblModelName_0" class="control-label">RIDGE+ With GPS</span>
+                                <input type="hidden" name="ctl00$ctl00$body$innerbody$rptVehicleDetails$ctl01$hfVehicleModelId" id="body_innerbody_rptVehicleDetails_hfVehicleModelId_0" value="2">
+                            </td>
+                            <td class="text-center"><a target="_blank" href="/Uploads/ETW/VehicleModelPhoto/2/2_UploadBrochure05122021052020892.jpg" class="download-attachment"><span class="mdi mdi-attachment"></span></a></td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_Label33_0" class="control-label ">96435</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_Label34_0" class="control-label ">25500</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblExShowRoomPrice_0" class="control-label ">70935</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblSubsidy_0" class="control-label ">28930</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblPaidAmount_0" class="control-label ">42005</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblRTOTax_0" class="control-label ">0</span>
+                            </td>
+
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblRoadTax_0" class="control-label ">0</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="body_innerbody_rptVehicleDetails_chkModel_1" type="checkbox" name="ctl00$ctl00$body$innerbody$rptVehicleDetails$ctl02$chkModel">
+                            </td>
+                            <td><img src="/assets/img/logo2.png" alt="" height="50" class="border rounded-pill"></td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblOEM_1" class="control-label">JITENDRA NEW EV TECH PVT LTD</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblModelName_1" class="control-label">JMT 1000 3K</span>
+                                <input type="hidden" name="ctl00$ctl00$body$innerbody$rptVehicleDetails$ctl02$hfVehicleModelId" id="body_innerbody_rptVehicleDetails_hfVehicleModelId_1" value="8">
+                            </td>
+                            <td class="text-center"><a target="_blank" href="/Uploads/ETW/VehicleModelPhoto/8/8_UploadBrochure04112022055959128.jpg" class="download-attachment"><span class="mdi mdi-attachment"></span></a></td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_Label33_1" class="control-label ">132417</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_Label34_1" class="control-label ">48000</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblExShowRoomPrice_1" class="control-label ">84417</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblSubsidy_1" class="control-label ">30000</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblPaidAmount_1" class="control-label ">54417</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblRTOTax_1" class="control-label ">0</span>
+                            </td>
+
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblRoadTax_1" class="control-label ">0</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="body_innerbody_rptVehicleDetails_chkModel_3" type="checkbox" name="ctl00$ctl00$body$innerbody$rptVehicleDetails$ctl04$chkModel">
+                            </td>
+                            <td><img src="/assets/img/logo2.png" alt="" height="50" class="border rounded-pill"></td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblOEM_3" class="control-label">Hero Electric Vehicles Pvt Ltd</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblModelName_3" class="control-label">OPTIMA PRO</span>
+                                <input type="hidden" name="ctl00$ctl00$body$innerbody$rptVehicleDetails$ctl04$hfVehicleModelId" id="body_innerbody_rptVehicleDetails_hfVehicleModelId_3" value="6">
+                            </td>
+                            <td class="text-center"><a target="_blank" href="/Uploads/ETW/VehicleModelPhoto/6/6_UploadBrochure09042021041028028.jpg" class="download-attachment"><span class="mdi mdi-attachment"></span></a></td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_Label33_3" class="control-label ">113791</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_Label34_3" class="control-label ">30300</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblExShowRoomPrice_3" class="control-label ">83491</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblSubsidy_3" class="control-label ">30000</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblPaidAmount_3" class="control-label ">53491</span>
+                            </td>
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblRTOTax_3" class="control-label ">0</span>
+                            </td>
+
+                            <td>
+                                <span id="body_innerbody_rptVehicleDetails_lblRoadTax_3" class="control-label ">0</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </fieldset>
+            -->
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+
+                            <span class="text-danger font-weight-bolder">
+                                <small>
+                                    <b id="">Note : નીચે દર્શાવેલ ડોક્યુમેન્ટ્સ અરજી સાથે નીચેના ક્રમાનુસાર બીડવાના રહેશે.</b> <br>
+                                    <b id="">Note : Uploaded documents are less than 1 MB.</b> <br>
+                                </small>
+                            </span>
+                            <table class="table table-striped table-bordered table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td scope="col">
+                                           	શ્રમયોગીને કંપની દ્વારા આપવામાં આવેલ ઓળખકાર્ડની નકલ:<span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="col">
+                                              મહિલા શ્રમયોગીનાં આધારકાર્ડની નકલ:<span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">
+                                             લગ્ન નોંધણી પ્રમાણપત્રની નકલ ( ફક્ત સરકારશ્રીનુ પ્રમાણ પત્ર) : <span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">
+                                           	મહિલા શ્રમયોગીનાં બેંક પાસબુકનાં પહેલા પાનાની નકલ (એકાઉન્ટ નંબર IFSC CODE સાથે) : <span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">
+                                           	સંસ્થા દ્વારા લેબર વેલ્ફેર ફંડ જમા કરાવ્યા રસીદની નકલ (છેલ્લા 3 વર્ષ ની): <span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col">
+                                            પ્રમાણિક પ્રમાણપત્ર (Bonafide Certificate) : <span class="text-danger">*</span>
+                                        </td>
+                                        <td scope="col">
+                                            <input type="file" class="form-control-file border p-1" id="">
+                                        </td>
+                                    </tr>
+
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-contact2" role="tabpanel" aria-labelledby="pills-contact-tab2" tabindex="0">
+
+                            <div class="">
+                                <p>
+                                 હુ આ યોજના અંતર્ગત સહાય મેળવવા માટે અરજી કરુ છુ. ઉપરોક્ત જણાવેલ તમામ વિગતો સંપૂર્ણ સાચી છે, જો ખોટી પૂરવાર થાય તો હું ગુન્હાને પાત્ર છું અને આ યોજના હેઠળ મળેલ સહાય પરત કરવાની બાહેંધરી આપુ છુ.
+
+
+                                </p>
+
+                                <div class="text-center">
+                                    <input id="" type="checkbox" name="" checked="checked" style="transform:scale(1.3)">
+                                    <label class="">
+                                        હું ઉપરની બધી શરતો થી સહેમત છું.
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer text-center border">
+
+                            <button class="btn btn-sm btn-primary pl-3 pr-3">Save &amp; next </button>
+                            <button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4 d-none">
+                        <div class="card-header py-2 bg-primary d-flex justify-content-between">
+                            <span class="text-white"><i class='bx bxs-pencil align-middle'></i> Fill the details <small> ( * marks fields are Mandatory)</small> </span>
+                            <a asp-controller="Home" asp-action="Grid" class="f500 text-white"> <i class='bx bx-list-ul align-middle'></i> Go to View Page</a>
+                        </div>
+                        <div class="card-body">
+
+                            <fieldset class="mb-4">
+                                <legend>Title Goes Here</legend>
+                                <div class="form-horizontal form-bordered">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-2">
+                                            Field Name<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="control-form col-md-4">
+                                            <input name="" type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-2 align-self-center">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">popup form</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <div class="form-horizontal form-bordered">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <div class="col-md-2 align-self-center">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">popup form</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                HTML Default select<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <select class="form-select form-control" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <label class="control-label col-md-2 border-left">
+                                                HTML Default select<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <select class="form-select form-control" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Select2 Single<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <select class="js-example-basic-single form-control" name="state">
+                                                    <option>Please Select</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                </select>
+                                            </div>
+                                            <label class="control-label col-md-2 border-left">
+                                                Select2 Multiple<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <select class="js-example-basic-multiple form-control form-select" name="states[]" multiple="multiple">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-horizontal form-bordered">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                    <label class="form-check-label" for="inlineCheckbox1">1</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                    <label class="form-check-label" for="inlineCheckbox2">2</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+                                                    <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                    <label class="form-check-label" for="inlineRadio1">1</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                    <label class="form-check-label" for="inlineRadio2">2</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+                                                    <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                HTML default date picker<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <input type="date" class="form-control" />
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Bootstrap date picker<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <input type="text" class="form-control datepicker1" placeholder="mm/dd/yyyy" />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Request Subject<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <textarea name="" rows="3" cols="30" id="" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <label for="formFile" class="form-label"></label>
+                                                <input class="form-control" type="file" id="formFile">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">Remarks</label>
+                                            <div class="control-form col-md-4">
+                                                <textarea name="" rows="3" cols="30" id="" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button class="btn btn-sm btn-primary pl-3 pr-3">Save &amp; next </button>
+                            <button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">Cancel</button>
+                        </div>
+                    </div>
+                    <!--<form class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputEmail4" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail4">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword4">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputAddress2" class="form-label">Address 2</label>
+                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputCity" class="form-label">City</label>
+                            <input type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputState" class="form-label">State</label>
+                            <select id="inputState" class="form-select">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="inputZip" class="form-label">Zip</label>
+                            <input type="text" class="form-control" id="inputZip">
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Check me out
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </div>
+                    </form>-->
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+    <!-- Modal -->
+
+    <div class="modal fade" id="schemeModal" tabindex="-1" aria-labelledby="schemeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schemeModalLabel">મહિલા શ્રમયોગી લગ્ન સહાય યોજના</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">રાજયના ઉચ્ચ શિક્ષણના અભ્યાસક્રમોમાં પ્રવેશ મેળવવા માંગતા તેજસ્વી અને જરૂરીયાતમંદ બાંધકામ શ્રમિકના વિદ્યાર્થીઓની કારકિર્દીના ઘડતર માટે તથા શિક્ષણમાં આગળ વધી બાંધકામ શ્રમિકનું બાળક પણ ર્ડાકટર, એન્જીનીયર બને તે હેતુસર બાંધકામ શ્રમિકના કોઈ પણ બે બાળકને વર્ષમાં એક વાર માટે આર્થિક સહાય પુરી પાડવી. </li>
+                    </ul>
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Apply</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-2 bg-primary d-flex justify-content-between">
+                            <span class="text-white"><i class='bx bxs-pencil align-middle'></i> Fill the details <small> ( * marks fields are Mandatory)</small> </span>
+                            <a asp-controller="Home" asp-action="Grid" class="f500 text-white"> <i class='bx bx-list-ul align-middle'></i> Go to View Page</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <div class="form-horizontal form-bordered">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <div class="col-md-2 align-self-center">
+                                                <a href="#" data-toggle="modal" data-target="#exampleModal">popup form</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                HTML Default select<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <select class="form-select form-control" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <label class="control-label col-md-2 border-left">
+                                                HTML Default select<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <select class="form-select form-control" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-horizontal form-bordered">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                    <label class="form-check-label" for="inlineCheckbox1">1</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                    <label class="form-check-label" for="inlineCheckbox2">2</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+                                                    <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                    <label class="form-check-label" for="inlineRadio1">1</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                    <label class="form-check-label" for="inlineRadio2">2</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+                                                    <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-2">
+                                                <input name="" type="text" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                HTML default date picker<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <input type="date" class="form-control" />
+                                            </div>
+                                            <label class="control-label col-md-2">
+                                                Bootstrap date picker<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <input type="text" class="form-control datepicker1" placeholder="mm/dd/yyyy" />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Request Subject<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <textarea name="" rows="3" cols="30" id="" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">
+                                                Field Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="control-form col-md-4">
+                                                <label for="formFile" class="form-label"></label>
+                                                <input class="form-control" type="file" id="formFile">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-2">Remarks</label>
+                                            <div class="control-form col-md-4">
+                                                <textarea name="" rows="3" cols="30" id="" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button class="btn btn-sm btn-primary pl-3 pr-3">Save </button>
+                            <button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->

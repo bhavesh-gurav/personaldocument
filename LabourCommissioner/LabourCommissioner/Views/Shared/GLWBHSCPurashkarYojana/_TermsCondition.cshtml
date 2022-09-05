@@ -1,0 +1,50 @@
+﻿@using LabourCommissioner.Abstraction.ViewDataModels;
+@model FinalSubmitModel
+@{
+    var TabSequenceNo = ViewBag.TabSequenceNo;
+    var ServiceId = ViewBag.ServiceId;
+    var ApplicationId = ViewBag.ApplicationId;
+}
+
+
+<form id="TermsConditionsForm" method="post" asp-controller="BOCWSikshanSahayYojana" asp-action="FinalSubmit">
+    <input type="hidden" asp-for="serviceid" value="@ServiceId" />
+    <input type="hidden" asp-for="tabsequenceno" value="@TabSequenceNo" />
+    <input type="hidden" asp-for="ApplicationId" value="@ApplicationId" />
+    <div class="tab-pane fade show" id="pills-contact2" role="tabpanel" aria-labelledby="pills-contact-tab2" tabindex="0">
+
+        <div class="">
+            <p>
+                આથી પ્રમાણિત કરૂ છું કે, ઉપર જણાવેલ તમામ માહિતી સાચી છે. વધુમાં જાહેર કરૂ છું કે મેં આવા પ્રકારની સહાય મેળવવા અન્ય કોઈ સરકારી કચેરીમાં અરજી કરી નથી કે સહાય મેળવેલ નથી. જો ઉપર આપેલ માહિતી સાચી ન હોવાનું કે ખોટી હોવાનું જણાય તો અન્ય સરકારી સહાય મેળવવા અરજી કરી હોવાનું જાહેર થાય તો સારવાર માટે આ સહાય યોજનાની આર્થિક સહાય મેળવેલ હશે તે પુરેપુરી રકમ સરકારમાં પરત ભરવા કબૂલ મંજૂર હોવાનું જાહેર કરૂ છું ને પરત ભરવા બાંહેધરી આપુ છું, તથા ખોટી વિગતો રજૂ કરી નાણાકીય લાભ લેવો ગુનો બને છે, તેની મને જાણ છે. ખોટી વિગતો રજૂ કરી નાણાકીય લાભ મેળવેલ હશે તો મારી સામે ફોજદારી રાહે જે કોઈ કાર્યવાહી થશે તે મને કબુલ છે. ઉપરોકત તમામ વિગતો મેં વાંચી સમજીને શુધ્ધબુધ્ધિ પૂર્વક ભરેલ છે.
+            </p>
+
+            @*<div class="text-center">
+            <input id="chk_Terms_Conditions" type="checkbox" name="" style="transform:scale(1.3)">
+            <label class="">
+            હું ઉપરની બધી શરતો થી સહેમત છું.
+            </label>
+            </div>*@
+            <div class="form-group form-check text-center">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" asp-for="isagree" data-val="false" />
+                    હું ઉપરની બધી શરતો થી સહેમત છું.
+                </label>
+                <span asp-validation-for="isagree" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-footer text-center border">
+            <button type="submit" id="btnSubmit" class="btn btn-sm btn-primary pl-3 pr-3">Save</button>
+            <button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">Cancel</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#btnSubmit").click(function(e) {
+            if (!($('#isagree').prop('checked'))) {
+                alert('Accept The Terms and Conditions');
+                return false;
+            }
+        });
+    });
+</script>

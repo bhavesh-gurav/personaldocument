@@ -1,0 +1,99 @@
+﻿@using static LabourCommissioner.Abstraction.ViewDataModels.DocumentDetails
+@model IList<DocumentFileDetails>
+@{
+    ViewData["Title"] = "Save Attachment";
+    var ServiceId = ViewBag.ServiceId;
+    var ApplicationId = ViewBag.ApplicationId;
+    var TabSequenceNo = ViewBag.TabSequenceNo;
+}
+
+@*<form id="myForm" asp-controller="BOCWSikshanSahayYojana" asp-action="Files" method="post" enctype="multipart/form-data">*@
+<form enctype="multipart/form-data" method="post" asp-controller="BOCWSikshanSahayYojana" asp-action="UploadDocument" asp-route-ApplicationId="@ApplicationId" asp-route-ServiceId="@ServiceId">
+    @*<input type="hidden" asp-for="TabSequenceNo" value="@ApplicationId" />*@
+    @* <div asp-validation-summary="All" class="text-danger"></div>*@
+    <div class="tab-pane fade show" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+
+        <span class="text-danger font-weight-bolder">
+            <small>
+                <b id="">Note : બધા અપલોડ કરેલા દસ્તાવેજોની સ્વયં પ્રમાણિત હોવી જોઈએ</b> <br>
+                <b id="">Note : Uploaded documents are less than 1 MB.</b> <br>
+            </small>
+        </span>
+        <table class="table table-striped table-bordered table-sm">
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td scope="col">
+                                @if (@Model[i].IsCompulsary == 1)
+                                {
+                                    @Model[i].DocumentName <span class="text-danger">*</span>
+                                }
+                                else
+                                {
+                                    @Model[i].DocumentName
+                                }
+
+                                @Html.HiddenFor(m => Model[i].DocumentMasterId)
+                                @Html.HiddenFor(m => Model[i].DocumentName)
+                                @Html.HiddenFor(m => Model[i].DocumentNameGuj)
+                                @Html.HiddenFor(m => Model[i].DocumentTypeIds)
+                                @Html.HiddenFor(m => Model[i].ServiceId)
+                                @Html.HiddenFor(m => Model[i].TabSequenceNo)
+                            </td>
+
+                            <td scope="col">
+
+                                @if (@Model[i].IsCompulsary == 1)
+                                {
+                                    <input type="file" id="FormFile" asp-for="@Model[i].IdImage.File" class="form-control-file border p-1" />
+                                    <span asp-validation-for="@Model[i].IdImage.File" class="text-danger"></span>
+                                }
+                                else
+                                {
+                                    <input type="file" id="FormFile" asp-for="@Model[i].IdImage.File" onchange="fileValidation(this.value)" data-val="false" class="form-control-file border p-1" />
+                                }
+
+
+                            </td>
+                            <td scope="col">                                
+                                <a asp-controller="BOCWSikshanSahayYojana" asp-action="DownloadDocument" asp-route-id="@Model[i].CouchDBDocId" asp-route-filename="@Model[i].FileName">@Model[i].FileName</a>
+                            </td>
+                            @*<td scope="col">
+                    <input type="reset">
+                    </td>*@
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="card-footer text-center border">
+        <button class="btn btn-sm btn-primary pl-3 pr-3">Save</button>
+        <button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">Cancel</button>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".form-control-file").on("change", function() {
+            var fileName = $(this).val();
+
+            // Allowing file type
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+            if (!allowedExtensions.exec(fileName)) {
+                alert('Invalid file type');
+                $(this).val('');
+                return false;
+            }
+            if (this.files[0].size > 1000000) {
+                alert('Uploaded documents are less than 1 MB');
+                $(this).val('');
+                return false;
+            }
+
+        });
+    });
+</script>

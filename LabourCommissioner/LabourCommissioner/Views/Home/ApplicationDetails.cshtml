@@ -1,0 +1,166 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@using LabourCommissioner.Common.Utility
+@using System.Web
+@model IEnumerable<ApplicationDetailsModel>
+@{
+    ViewData["Title"] = "Application Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var i = 1;
+    var TabSequenceNo = ViewBag.TabSequenceNo;
+    var ControllerName = "";
+    var ActionName = "";
+    var ServiceId = ViewBag.serviceId;
+    if (@Model != null && Model.Count() > 0)
+    {
+        ControllerName = Convert.ToString(@Model.Select(s => s.ControllerName).FirstOrDefault());
+        ActionName = Convert.ToString(@Model.Select(s => s.ActionName).FirstOrDefault());
+    }
+}
+
+<style>
+    section#services {
+        margin-top: 38px;
+    }
+
+    .bg-primary, .badge-primary, .card-primary {
+        background: #e3a800 !important;
+        border-color: var(--navy-primary) !important;
+        color: white !important;
+    }
+</style>
+<section id="hero" class="hero2">
+    <h2 class="animate__animated animate__fadeInDown">Gujarat Labour Walfare Board</h2>
+</section>
+<main id="main">
+    <section id="services" class="services services2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-2 bg-primary d-flex justify-content-between">
+                            <span class="text-white"> અરજીઓ ની યાદી </span>
+                            
+                            @if(@ServiceId > 0)
+                            {
+                                <span><a class="btn btn-primary" asp-controller="@ControllerName" asp-action="@ActionName" asp-route-strid="@HttpUtility.UrlEncode(CommonUtils.Encrypt(ServiceId.ToString()))"><i class="bi bi-pencil"></i> Apply</a></span>
+                            }
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped DataTable table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No.</th>
+                                            <th>Application No.</th>
+                                            @* <th>Application Id</th>*@
+                                            <th>Application Date</th>
+                                            <th>Name</th>
+                                            <th>Name in Gujarati</th>
+                                            <th>District Name</th>
+                                            <th>District Name in Gujarati</th>
+                                            <th>Taluka Name</th>
+                                            <th>Taluka Name Gujarati</th>
+                                            <th>Current Address in English</th>
+                                            <th>Current Address in Gujarati</th>
+                                            <th>Mobile No.</th>
+                                            <th>Application Status</th>
+                                            <th>Remarks</th>
+                                            <th>Action</th>
+                                            <th>Download Application Form</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @if (Model != null)
+                                        {
+
+                                            @foreach (ApplicationDetailsModel item in Model)
+                                            {
+                                                <tr>
+                                                    <td scope="col">
+                                                        @i
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.ApplicationNo
+                                                    </td>
+                                                    @* <td scope="col">
+                                            @item.ApplicationId
+                                            </td>*@
+                                                    <td scope="col">
+                                                        @item.ApplicationDate
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.Name
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.NameinGujarati
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.DistrictName
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.DistrictNameGuj
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.TalukaName
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.TalukaNameGuj
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.CAddressInEng
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.CAddressInGuj
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.MobileNo
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.ApplicationStatus
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.Remarks
+                                                    </td>
+                                                    <td class="text-center" scope="col">
+                                                        @if (@item.EditVisible == 1)
+                                                        {
+                                                            <a asp-controller="BOCWSikshanSahayYojana" asp-action="AppPersonalDetails" asp-route-strApplicationId="@HttpUtility.UrlEncode(CommonUtils.Encrypt(item.ApplicationId.ToString()))" asp-route-strId="@HttpUtility.UrlEncode(CommonUtils.Encrypt(item.ServiceId.ToString()))">Edit</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>-</span>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <a asp-controller="Report" asp-action="DownloadApplicationReport" asp-route-strApplicationId="@HttpUtility.UrlEncode(CommonUtils.Encrypt(item.ApplicationId.ToString()))" class="text-danger" target="_blank" style="display :inline;font-size: 1.55rem;">
+                                                            <i class='bx bxs-file-pdf'></i>
+                                                        </a>
+                                                    </td>
+                                                    @*<td class="text-center" scope="col">
+                                            <a class="text-info" href="#" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file'></i>
+                                            </a>
+                                            </td>*@
+                                                    @* <td class="text-center" scope="co   l">
+                                            <span id="ContentPlaceHolder1_rptServices_Label1_0" class="badge bg-danger">Pending</span>
+                                            </td>*@
+
+
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

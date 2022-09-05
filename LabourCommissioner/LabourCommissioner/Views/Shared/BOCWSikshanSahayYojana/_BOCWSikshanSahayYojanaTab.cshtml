@@ -1,0 +1,166 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@*@model IEnumerable<LabourCommissioner.Abstraction.DataModels.TabModel>*@
+@{
+    var Model = ViewBag.AppPersonalDetails;
+    var filModel = ViewBag.AppPersonalDetails as IEnumerable<TabModel>;
+    var TabSequenceNo = 0;
+    var ApplicationId = ViewBag.ApplicationId;
+    var ControllerName = "";
+    var ActionName = "";
+    var ServiceId = "";
+    //var isFilled = ViewBag.isFilled;
+
+    // var ApplicationId = "";
+    if (filModel != null)
+    {
+        var TabSequenceNum = (from s in filModel
+                              where s.isfilled == false
+                              orderby s.SequenceNo
+                              select new { s.SequenceNo, s.ControllerName, s.ActionName, s.ServiceId, s.ApplicationId }).FirstOrDefault();
+
+        if (TabSequenceNum != null)
+        {
+            ControllerName = TabSequenceNum.ControllerName;
+            ActionName = TabSequenceNum.ActionName;
+            ServiceId = Convert.ToString(TabSequenceNum.ServiceId);
+            ApplicationId = TabSequenceNum.ApplicationId;
+            TabSequenceNo = Convert.ToInt32(TabSequenceNum.SequenceNo);
+
+        }
+
+        //ControllerName = filModel.Where(i => i.SequenceNo == Convert.ToString(TabSequenceNo)).Select(s => s.ControllerName).FirstOrDefault();
+        //ActionName = filModel.Where(i => i.SequenceNo == Convert.ToString(TabSequenceNo)).Select(s => s.ActionName).FirstOrDefault();
+        //ServiceId = Convert.ToString(filModel.Select(s => s.ServiceId).FirstOrDefault());
+        // ApplicationId = Convert.ToString(filModel.Select(s => s.ApplicationId).FirstOrDefault());
+    }
+    else
+    {
+        ControllerName = "";
+        ActionName = "";
+    }
+    string clsActive = "";
+    string clsdisabled = "";
+}
+
+<input type="hidden" id="hdnControllerName" value="@ControllerName" />
+<input type="hidden" id="hdnActionName" value="@ActionName" />
+<input type="hidden" id="hdnServiceId" value="@ServiceId" />
+<input type="hidden" id="hdnApplicationId" value="@ApplicationId" />
+
+<div class="d-flex justify-content-between" id="dvtablist">
+    <div class="col position-relative">
+
+        <ul class="nav nav-pills mb-3 justify-content-between" role="tablist">
+            @foreach (var item in Model)
+            {
+
+                @*clsActive = "";
+                if (@ApplicationId == 0)
+                {
+                    if (item.SequenceNo == "1")
+                    {
+                        clsActive = "active";
+                        clsdisabled = "";
+                    }
+                    else
+                    {
+                        clsdisabled = "disabled";
+                    }
+                }
+                else if (@ApplicationId > 0)
+                {
+                    if (TabSequenceNo >= Convert.ToInt32(item.SequenceNo))
+                    {
+                      
+
+                        if (TabSequenceNo == Convert.ToInt32(item.SequenceNo))
+                        {
+                            clsActive = "active";
+                            clsdisabled = "";
+                        }
+                        else
+                        {
+
+                            clsActive = "";
+                        }
+
+                    }
+                    else
+                    {
+                        clsActive = "";
+                        clsdisabled = "disabled";
+                    }
+                }*@
+
+                clsActive = "";
+                if (@ApplicationId == 0)
+                {
+                    if (item.SequenceNo == "1")
+                    {
+                        clsActive = "active";
+                        clsdisabled = "";
+                    }
+                    else
+                    {
+                        clsdisabled = "disabled";
+                    }
+                }
+                else if (@ApplicationId > 0)
+                {
+                    if (TabSequenceNo >= Convert.ToInt32(item.SequenceNo))
+                    {
+                      
+
+                        if (TabSequenceNo == Convert.ToInt32(item.SequenceNo))
+                        {
+                            clsActive = "active";
+                            clsdisabled = "";
+                        }
+                        else
+                        {
+
+                            clsActive = "";
+                        }
+
+                    }
+                    else
+                    {
+                        clsActive = "";
+                        clsdisabled = "disabled";
+                    }
+                }
+
+
+
+                @*clsActive = "";
+            if (item.ApplicationId == 0 && item.SequenceNo == "1")
+            {
+            clsActive = "active";
+            }
+
+            else if (item.ApplicationId != 0 && item.isfilled == true)
+            {
+            clsActive = "active";
+            }
+            if (item.ApplicationId == 0 && item.isfilled != true)
+            {
+            clsdisabled = "disabled";
+            }*@
+
+
+                <li class="nav-item" role="presentation">
+                    @*<form method="post">*@
+
+                    <button type="submit" class="nav-link  @clsActive shadow" id="@item.ActionName" onclick="return LoadSchemePartialView('@item.ControllerName','@item.ActionName','@item.ServiceId','@ApplicationId','@item.isfilled');" @clsdisabled>
+                        @item.SequenceNo<br />
+                        <span>@item.TabName</span>
+                    </button>
+
+                    @*</form>*@
+                </li>
+            }
+        </ul>
+        <span style=" display: flex; border: solid 1px var(--bs-primary); margin-top: -50px; position: absolute; width: 94%; justify-content: center; margin-left: 2%; z-index: -1; opacity: .5; "></span>
+    </div>
+</div>
+

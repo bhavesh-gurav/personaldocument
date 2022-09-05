@@ -1,0 +1,51 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@*@model IEnumerable<LabourCommissioner.Abstraction.DataModels.TabModel>*@
+@{
+    var Model = ViewBag.AppPersonalDetails;
+    var filModel = ViewBag.AppPersonalDetails as IEnumerable<TabModel>;
+    var TabSequenceNo = ViewBag.TabSequenceNo;
+    var ApplicationId = ViewBag.ApplicationId;
+    var ControllerName = "";
+    var ActionName = "";
+    var ServiceId = "";
+    var isFilled = ViewBag.isFilled;
+    // var ApplicationId = "";
+    if (filModel != null)
+    {
+        ControllerName = filModel.Where(i => i.SequenceNo == Convert.ToString(TabSequenceNo)).Select(s => s.ControllerName).FirstOrDefault();
+        ActionName = filModel.Where(i => i.SequenceNo == Convert.ToString(TabSequenceNo)).Select(s => s.ActionName).FirstOrDefault();
+        ServiceId = Convert.ToString(filModel.Select(s => s.ServiceId).FirstOrDefault());
+        // ApplicationId = Convert.ToString(filModel.Select(s => s.ApplicationId).FirstOrDefault());
+    }
+    else
+    {
+        ControllerName = "";
+        ActionName = "";
+    }
+}   
+
+<input type="hidden" id="hdnControllerName" value="@ControllerName" />
+<input type="hidden" id="hdnActionName" value="@ActionName" />
+<input type="hidden" id="hdnServiceId" value="@ServiceId" />
+<input type="hidden" id="hdnApplicationId" value="@ApplicationId" />
+
+<div class="d-flex justify-content-between">
+    @foreach (var item in Model)
+    {
+        <div class="">
+
+            <ul class="nav nav-pills mb-3 justify-content-between" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    @*<form method="post">*@
+                    <button type="submit" class="nav-link active shadow" onclick="return LoadSchemePartialView('@item.ControllerName','@item.ActionName','@item.ServiceId','@ApplicationId','@isFilled');" id="@item.ActionName">
+                        @item.SequenceNo<br />
+                        <span>@item.TabName</span>
+                    </button>
+                    @*</form>*@
+                </li>
+            </ul>
+        </div>
+    }
+</div>
+
+

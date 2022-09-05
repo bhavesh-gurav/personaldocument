@@ -1,0 +1,125 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@using System.Security.Claims
+@model IEnumerable<ServiceMaster>
+@{
+    var identity = (ClaimsIdentity)User.Identity;
+    IEnumerable<Claim> claims = identity.Claims;
+}
+
+<div class="row mt-5">
+    <div class="col-lg-12 d-flex justify-content-center">
+        <ul id="portfolio-flters">
+            <li class="lnk_filter0 filter-active">All</li>
+            @*<li class="lnk_filter1">Factory Workers</li>
+            <li class="lnk_filter2">Construction Workers</li>
+            <li class="lnk_filter3">Educational Scheme</li>*@
+        </ul>
+        <span>Total Scheme:<b>@Model.Count()</b></span>
+    </div>
+</div>
+@if (Model != null && identity?.Claims.FirstOrDefault(x => x.Type.Equals("BeneficiaryType", StringComparison.OrdinalIgnoreCase))?.Value == "1")
+{
+    <div class="constructions">
+        <p class="h5 d-flex align-items-center"><i class='bx bx-building-house me-2'></i>Constructions  Workers (Building and Other Constructions Workers Welfare Board)</p>
+        <hr />
+        <div class="row portfolio-container portfolio-container2">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 portfolio-item">
+                    <div class="scheme">
+                        @*<a href="@Url.Action("GetSchemeDescription","Scheme", new { ServiceId = @item.ServiceId })">*@
+                        <a href="#" onclick="return getSchemeDescription(@item.ServiceId,'dynamicSchemeModel');">
+                            <i class='bx bx-book-open'></i>
+                            <h5>@Html.DisplayFor(modelItem=>item.ServiceNameGujarati)</h5>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+@if (Model != null && identity?.Claims.FirstOrDefault(x => x.Type.Equals("BeneficiaryType", StringComparison.OrdinalIgnoreCase))?.Value == "2")
+{
+    <div class="labour">
+        <p class="h5 d-flex align-items-center"><i class='bx bxs-user-circle me-2'></i>Factory Workers (Labour Welfare Board)</p><hr />
+
+        <div class="row portfolio-container portfolio-container2">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 portfolio-item">
+                    <div class="scheme">
+                        @*<a href="@Url.Action("GetSchemeDescription","Scheme", new { ServiceId = @item.ServiceId })">*@
+                        <a href="#" onclick="return getSchemeDescription(@item.ServiceId,'dynamicSchemeModel');">
+                            <i class='bx bx-book-open'></i>
+                            <h5>@Html.DisplayFor(modelItem=>item.ServiceNameGujarati)</h5>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+@if (Model != null && identity?.Claims.FirstOrDefault(x => x.Type.Equals("BeneficiaryType", StringComparison.OrdinalIgnoreCase))?.Value == "3")
+{
+    <div class="educational">
+        <p class="h5 d-flex align-items-center"><i class='bx bxs-book me-2'></i>Educational  Scheme</p><hr />
+
+        <div class="row portfolio-container portfolio-container2">
+
+            <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="scheme">
+
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#schemeModal">
+                        <i class='bx bx-book-open'></i>
+                        <h5>શિક્ષણ સહાય/ પી.એચ.ડી યોજના</h5>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="scheme">
+                    <a asp-controller="Home" asp-action="Form">
+                        <i class='bx bx-buildings'></i>
+                        <h5>હોસ્ટેલ સહાય યોજના</h5>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="scheme">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#schemeGLWBHSC">
+                        <i class='bx bx-book-open'></i>
+                        <h5>શૈક્ષણિક પુરસ્કાર યોજના (ધોરણ :૧૨)</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="scheme">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#schemeGLWBSSC">
+                        <i class='bx bx-book-open'></i>
+                        <h5>શૈક્ષણિક પુરસ્કાર યોજના (ધોરણ :૧૦)</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="scheme">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#HigherStudyschemeModal">
+                        <i class='bx bx-book-open'></i>
+                        <h5>MBBS / BDS / BAMS / Physiotherapy / BPharm / BE / CA / ICWA / ICFA /CS માં પ્રવેશ મેળવનાર શ્રમયોગીઓના બાળકો માટે સહાય યોજના</h5>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+

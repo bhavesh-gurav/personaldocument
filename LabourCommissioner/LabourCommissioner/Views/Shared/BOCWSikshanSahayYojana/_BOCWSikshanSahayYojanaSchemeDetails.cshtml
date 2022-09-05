@@ -1,0 +1,157 @@
+﻿@using LabourCommissioner.Abstraction.ViewDataModels;
+@model SchemeDetails
+@{
+    var TabSequenceNo = ViewBag.TabSequenceNo;
+    var ServiceId = ViewBag.ServiceId;
+    var ApplicationId = ViewBag.ApplicationId;
+    var isfilled = ViewBag.isFilled;
+    var ApplicationNo = "";
+    var isFilled = ViewBag.isFilled;
+    //if (isfilled == true)
+    //{
+    //    ApplicationNo = Model.ApplicationNo;
+    //}
+
+}
+
+
+<form id="schemeDetailsForm" enctype="multipart/form-data" method="post" asp-controller="BOCWSikshanSahayYojana" asp-action="AddSchemeDetails">
+    <input type="hidden" asp-for="TabSequenceNo" value="@TabSequenceNo" />
+    <input type="hidden" asp-for="ApplicationId" value="@ApplicationId" />
+    <input type="hidden" asp-for="ServiceId" value="@ServiceId" />
+    <div class="tab-pane fade show" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+        @*<div class="text-danger" asp-validation-summary="All"></div>*@
+        <fieldset class="custom-fieldset mb-4">
+            <legend id="body_innerbody_ucApplicantBankdetails_ucLegend">
+                <span id="body_innerbody_ucApplicantBankdetails_lblLegend">
+                    અભ્યાસની વિગત
+                </span>
+            </legend>
+            <div class="form-horizontal form-bordered">
+                <div class="form-group row">
+                    <span class="control-label col-md-3">સહાયની વિગત:<span class="text-danger">*</span></span>
+                    <div class="control-form col-md-3">
+                        <select asp-for="Schmename" class="form-control">
+                            <option value="">--Select--</option>
+                            <option>શિક્ષણ સહાય</option>
+                            <option>પી.એચ.ડી સહાય</option>
+                        </select>
+                        <span asp-validation-for="Schmename" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <span class="control-label col-md-3">અભ્યાસક્રમ:<span class="text-danger">*</span></span>
+                    <div class="control-form col-md-3">
+                        <select asp-for="Syllabus" onchange="GetDeegreeBySubjectId(this.value);" asp-items="@(isfilled == true ? new SelectList(@ViewBag.Syllabus,"Value", "Text",selectedValue:@Model.Syllabus) : new SelectList(@ViewBag.Syllabus,"Value", "Text"))" class="form-control">
+                            <option>--Select--</option>
+                        </select>
+                        @*<select asp-for="Syllabus" asp-items="@(new SelectList(@ViewBag.Syllabus,"Value", "Text"))" class="form-control"></select>*@
+                    </div>
+                    <span asp-validation-for="Syllabus" class="text-danger"></span>
+                    <span class="control-label col-md-3">
+                        ડીગ્રી/ધોરણ  :   <span class="text-danger">*</span>
+                    </span>
+                    <div class="control-form col-md-3">
+                        <select asp-for="Course" id="GSubject" onchange="GetBenifitByCourseId(this.value);" asp-items="@(isfilled == true ? new SelectList(@ViewBag.Degree, "Value", "Text", selectedValue: @Model.Course) : new SelectList(@ViewBag.Degree,"Value","Text"))" class="form-control">
+                            <option>--Select--</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="Course" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <span class="control-label col-md-3">
+                        અભ્યાસનું વર્ષ/સેમ.  <span class="text-danger">*</span>
+                    </span>
+                    <div class="control-form col-md-3">
+                        <select asp-for="AcadmicYearSem" asp-items="@(isfilled == true ? new SelectList(@ViewBag.Semester, "Value", "Text", selectedValue: @Model.AcadmicYearSem) : new SelectList(@ViewBag.Semester,"Value","Text"))" class="form-control">
+                            <option>--Select--</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="AcadmicYearSem" class="text-danger"></span>
+
+                    <span class="control-label col-md-3">
+                        એડમીશન મળ્યા/સત્ર શરુ થયા તારીખ :   <span class="text-danger">*</span>
+                    </span>
+                    <div class="control-form col-md-3">
+                        <input asp-for="StartDate" type="date" class="form-control" autocomplete="off" placeholder="dd/MM/yyyy"
+                               max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <span class="control-label col-md-3">
+                        શાળા/કોલેજનું નામ:   <span class="text-danger">*</span>
+                    </span>
+                    <div class="control-form col-md-3">
+                        <input asp-for="SchoolCollageName" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="SchoolCollageName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="Benifitsrs" class="control-label col-md-3">
+                        બેનિફિટ આરએસ   <span class="text-danger">*</span>
+                    </label>
+                    <div class="control-form col-md-3">
+                        <input id="Benifitsrs" asp-for="Benifitsrs" class="form-control"  />
+                        <span asp-validation-for="Benifitsrs" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="card-footer text-center border">
+            <button class="btn btn-sm btn-primary pl-3 pr-3">Save</button>
+            <button class="btn btn-sm btn-secondary pl-3 pr-3 mr-2">Cancel</button>
+        </div>
+
+    </div>
+</form>
+<script type="text/javascript">
+
+
+    //function GetBenifitByCourseId(courseId) {
+    //    $.ajax({
+    //        type: "get",
+    //        url: "/BOCWSikshanSahayYojana/GetBenifitByCourseId",
+    //        data: { courseId: courseId },
+    //        datatype: "json",
+    //        traditional: true,
+    //        success: function(data) {
+    //            debugger;
+    //            var Benifitsrs = "";
+    //            console.log(data.data.result.length);
+    //            Benifitsrs = data.data.result;
+
+    //            $('#Benifitsrs').html(Benifitsrs);
+    //            //$('#PlistTaluka').html(TalukaList);
+    //        }
+    //    });
+    //}
+
+    function GetDeegreeBySubjectId(subjectId) {
+
+        var subjectID = subjectId
+        $.ajax({
+            type: "get",
+            url: "/BOCWSikshanSahayYojana/GetSubject",
+            data: { subjectId: subjectId },
+            datatype: "json",
+            traditional: true,
+            success: function(data) {
+
+                var DegreeList = "";
+                DegreeList = DegreeList + '<option value="">--Select--</option>';
+                for (var i = 0; i < data.data.result.length; i++) {
+                    DegreeList = DegreeList + '<option value=' + data.data.result[i].value + '>' + data.data.result[i].text + '</option>';
+                }
+                $('#GSubject').html(DegreeList);
+
+            }
+        });
+    }
+
+
+</script>

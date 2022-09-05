@@ -1,0 +1,133 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@model IEnumerable<bocw_ssy_personaldetails>
+@{
+    ViewData["Title"] = "ListDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    section#services {
+    margin-top: 38px;
+}
+.btn-primary, .bg-primary, .badge-primary, .card-primary {
+    background: #e3a800 !important;
+    border-color: var(--navy-primary) !important;
+    color: white !important;
+}
+</style>
+    <section id="hero" class="hero2">
+    <h2 class="animate__animated animate__fadeInDown">Gujarat Labour Walfare Board</h2>
+</section>
+<main id="main">
+    <section id="services" class="services services2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-2 bg-primary d-flex justify-content-between">
+                            <span class="text-white"> અરજીઓ ની યાદી  </span>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped DataTable table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>SerialNumber</th>
+                                            <th>ApplicationNo</th>
+                                            <th>Name</th>
+                                            <th>FatherOrHusbandName</th>
+                                            <th>DateOfBirth</th>
+                                            <th>AadharcardNo</th>
+                                            <th>MobileNo</th>
+                                            <th>EmailId</th>
+                                            <th>CasteName</th> 
+                                           @* <th>DistrictName</th> 
+                                            <th>TalukaName</th> 
+                                            <th>VillageName</th> 
+                                            <th>StateName</th> *@
+                                            <th>PinCode</th>
+                                            <th>ApplicationForm</th>
+                                             <th>ApplicationStatus</th>
+                                             <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                       
+                                        @if (Model != null)
+                                        {
+                                            
+                                            @foreach (bocw_ssy_personaldetails item in Model)
+                                            {
+                                                <tr>
+                                                    <td scope="col">
+                                                        @item.i
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.ApplicationNo
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.Name
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.FatherOrHusbandName
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.DateOfBirth
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.AadharcardNo
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.MobileNo
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.EmailId
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.CasteName
+                                                    </td>
+                                                    
+                                                   @* <td scope="col">
+                                                        @item.DistrictName
+                                                    </td>
+                                                    <td scope="col">
+                                                        @item.TalukaName
+                                                    </td>
+                                                     <td scope="col">
+                                                        @item.VillageName
+                                                    </td>
+                                                      <td scope="col">
+                                                        @item.StateName
+                                                         </td>*@
+
+                                                    <td scope="col">
+                                                        @item.PPinCode
+                                                        </td>
+                                                    <td class="text-center" scope="col">
+                                                        <a class="text-info" href="#" target="_blank" style="display :inline;">
+                                                            <i class='bx bx-file'></i>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-center" scope="col">
+                                                        <span id="ContentPlaceHolder1_rptServices_Label1_0" class="badge bg-danger">Pending</span>
+                                                    </td>
+                                                    <td class="text-center" scope="col">
+                                                       <a asp-controller="BOCWSikshanSahayYojana" asp-action="AppPersonalDetails" asp-route-ApplicationId="@item.ApplicationId">Edit</a>
+                                                        </td>
+                                                   
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

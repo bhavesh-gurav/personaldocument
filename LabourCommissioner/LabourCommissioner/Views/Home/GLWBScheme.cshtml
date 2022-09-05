@@ -1,0 +1,509 @@
+﻿@using LabourCommissioner.Abstraction.DataModels
+@model IEnumerable<ServiceMaster>
+
+@{
+    ViewData["Title"] = "GLWBSchemes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .scm-tbl td a i {
+        font-size: 1.55rem;
+    }
+
+    .scm-tbl td a {
+        display: flex;
+        align-items: center;
+        color:#2c2c2c;
+        font-weight:600;
+    }
+</style>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero2">
+    <h2 class="animate__animated animate__fadeInDown">Gujarat Labour Walfare Board</h2>
+</section>
+<!-- End Hero -->
+
+
+
+<main id="main">
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services services2">
+        <div class="container-fluid">
+
+            <div class="section-title pt-5 pb-4 text-start">
+                @*<h2 class="mb-0">Tab Structure </h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>*@
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover scm-tbl" style="font-size:100%;">
+
+
+                            <thead class="bg-info bg-warning">
+                                <tr>
+
+                                    <th>Sr No.</th>
+                                    <th>Scheme Name</th>
+                                    <th class="text-center" style="width: 8%">Application Form</th>
+                                    <th class="text-center" style="width: 9%">Application Attachments</th>
+                                    <th class="text-center" style="width: 12%">Application status to apply online</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    int cnt = 0;
+                                    @foreach (ServiceMaster item in Model)
+                                    {
+                                        cnt++;
+                                        <tr>
+                                            <td class="text-right">@cnt</td>
+                                            <td>
+                                    <a a href="#" onclick="return getSchemeDescription(@item.ServiceId,'dynamicSchemeModelMain');"><i class="bx bxs-graduation"></i>@item.ServiceNameGujarati</a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="text-danger" href="#" target="_blank" style="display :inline;">
+                                                    <i class='bx bxs-file-pdf'></i>
+                                                </a>
+                                            </td>
+
+                                            <td class="text-center">
+                                                <a class="text-info" href="@item.ApplicationFormUrl" target="_blank" style="display :inline;">
+                                                    <i class='bx bx-file'></i>
+                                                </a>
+                                            </td>
+
+
+                                            <td class="text-center">
+                                                <span id="ContentPlaceHolder1_rptServices_Label1_0" class="badge bg-danger">Close</span>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                                @*<tr>
+                                    <td>1 </td>
+
+                                    <td>
+                                        @*<a asp-controller="Home" asp-action="GLWBSchemeDetails"><i class="bx bxs-graduation"></i>શ્રમયોગી સાઇકલ સબસીડી સહાય યોજના</a>*@
+                                        @*<a a href="#" data-bs-toggle="modal" data-bs-target="#GLWBCycleYojna"><i class="bx bxs-graduation"></i>શ્રમયોગી સાઇકલ સબસીડી સહાય યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="#" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="#" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file'></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_0" class="badge bg-danger">Close</span>
+                                    </td>
+
+                                </tr>*@
+
+                                @*<tr>
+                                    <td>2 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#schemeGWLBAccidentalDisability"><i class="bx bxs-graduation"></i> શ્રમયોગી અકસ્માત સહાય યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/CPViewApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/CPApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_1" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>3 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#HomeTownSchemeDetailsModal"><i class="bx bxs-graduation"></i> શ્રમયોગી હોમ ટાઉન યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/AAYViewApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments/SC/AAYApplicationDoument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_2" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>4 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#pravasanSchemeDetailsModal"><i class="bx bxs-graduation"></i>શ્રમયોગી પ્રવાસન યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/ALViewApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/ALApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_3" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>5 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#schemeModalHomeLoan"><i class="bx bxs-graduation"></i>શ્રમયોગી હોમ લોન વ્યાજ સુબસીડી યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/DLApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/DLApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_4" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>6 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#schemeGLWBHSC"><i class="bx bxs-graduation"></i>શૈક્ષણિક પુરસ્કાર યોજના (ધોરણ :૧૨)</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/PGDLApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/PGDLApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_5" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>7 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#schemeGLWBSSC"><i class="bx bxs-graduation"></i>શૈક્ષણિક પુરસ્કાર યોજના (ધોરણ :૧૦)</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/VSApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/VSApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_6" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>8 </td>
+
+                                    <td>
+                                        <a asp-controller="Home" asp-action="Form"><i class="bx bxs-graduation"></i>MBBS / BDS / BAMS / Physiotherapy / BPharm / BE / CA / ICWA / ICFA /CS માં પ્રવેશ મેળવનાર શ્રમયોગીઓના બાળકો માટે</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/ICMApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/ICMApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_7" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>9 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#GLWBMahilashramLagnaSahay"><i class="bx bxs-graduation"></i>મહિલા શ્રમયોગી લગ્ન સહાય યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/LFAViewApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments/" target="_blank" style="display :none;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_8" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>10 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#GLWBPSBPSY"><i class="bx bxs-graduation"></i>પ્રસુતિ સહાય અને બેટી પ્રોત્સાહન યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/KBNMApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/KBNMApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_9" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>11 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#GLWBTabibiSahay"><i class="bx bxs-graduation"></i>શ્રમયોગી સંપૂર્ણ તબીબી તપાસ સહાય યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/FSLApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/FSLApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_10" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>12 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#GLWBRamatGamatSpardha"><i class="bx bxs-graduation"></i>રમત ગમત કાર્યક્રમ માટેનું અરજી પત્રક</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/MGRptApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments//SC/MGApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_11" class="badge bg-danger">Close</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>13 </td>
+
+                                    <td>
+                                        <a data-bs-toggle="modal" data-bs-target="#schemeDisabledChildren"><i class="bx bxs-graduation"></i>શ્રમયોગીઓના દિવ્યાંગ બાળકો માટે સહાય યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/MSViewApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments/" target="_blank" style="display :none;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_12" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>14 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#schemeGWLBAccidental"><i class="bx bxs-graduation"></i>શ્રમયોગી મૃત્યુ અકસ્માત સહાય યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/" target="_blank" style="display :none;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments/" target="_blank" style="display :none;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_13" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>15 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#GLWBGameYojna"><i class="bx bxs-graduation"></i>શ્રમયોગીઓના બાળકો માટે રમત ગમતમાં ભાગ લેવા બદલ પ્રોત્સાહન યોજના</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/GHApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments/SCGH/GHApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_14" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>16 </td>
+
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#GLWBVIshishtKarykram"><i class="bx bxs-graduation"></i>વિશિષ્ટ કાર્યક્રમ માટેનુ અરજી પત્રક </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-danger" href="/ApplicationForm/SJEDSC/LFSViewApplicantDetails.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bxs-file-pdf'></i>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="text-info" href="/ApplicationDocuments/SC/LFSApplicationDocument.pdf" target="_blank" style="display :inline;">
+                                            <i class='bx bx-file' ></i>
+                                        </a>
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        <span id="ContentPlaceHolder1_rptServices_Label1_15" class="badge bg-success">Open</span>
+                                    </td>
+
+                                </tr>*@
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+@*modal start*@
+<div class="modal fade" id="dynamicSchemeModelMain" tabindex="-1" role="dialog" aria-labelledby="dynamicSchemeModelMainLabel" aria-hidden="true">
+    <div id="divContent"></div>
+</div>
+@*modal end*@
